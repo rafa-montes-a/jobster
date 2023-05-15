@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Question #<%= @the_question.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/questions">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_question/<%= @the_question.id %>">
+          Delete question
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Desc
+      </dt>
+      <dd>
+        <%= @the_question.desc %>
+      </dd>
+
+      <dt>
+        Prompt
+      </dt>
+      <dd>
+        <%= @the_question.prompt %>
+      </dd>
+
+      <dt>
+        Answer
+      </dt>
+      <dd>
+        <%= @the_question.answer %>
+      </dd>
+
+      <dt>
+        Job
+      </dt>
+      <dd>
+        <%= @the_question.job_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_question.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_question.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit question
+    </h2>
+
+    <form action="/modify_question/<%= @the_question.id %>"  method="post" >
+      <div>
+        <label for="desc_box">
+          Desc
+        </label>
+
+        <input type="text" id="desc_box" name="query_desc" value="<%= @the_question.desc %>">
+      </div>
+
+      <div>
+        <label for="prompt_box">
+          Prompt
+        </label>
+
+        <textarea id="prompt_box" name="query_prompt"><%= @the_question.prompt %></textarea>
+      </div>
+
+      <div>
+        <label for="answer_box">
+          Answer
+        </label>
+
+        <textarea id="answer_box" name="query_answer"><%= @the_question.answer %></textarea>
+      </div>
+
+      <div>
+        <label for="job_id_box">
+          Job
+        </label>
+
+        <input type="text" id="job_id_box" name="query_job_id" value="<%= @the_question.job_id %>">
+      </div>
+
+      <button>
+        Update question
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all firms
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new firm
+    </h2>
+
+    <form action="/insert_firm" method="post">
+      <div>
+        <label for="firm_name_box">
+          Firm name
+        </label>
+
+        <input type="text" id="firm_name_box" name="query_firm_name">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <button>
+        Create firm
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Firm name
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_firms.each do |a_firm| %>
+      <tr>
+        <td>
+          <%= a_firm.id %>
+        </td>
+
+        <td>
+          <%= a_firm.firm_name %>
+        </td>
+
+        <td>
+          <%= a_firm.user_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_firm.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_firm.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/firms/<%= a_firm.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

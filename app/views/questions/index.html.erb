@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all questions
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new question
+    </h2>
+
+    <form action="/insert_question" method="post">
+      <div>
+        <label for="desc_box">
+          Desc
+        </label>
+
+        <input type="text" id="desc_box" name="query_desc">
+      </div>
+
+      <div>
+        <label for="prompt_box">
+          Prompt
+        </label>
+
+        <textarea id="prompt_box" name="query_prompt" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="answer_box">
+          Answer
+        </label>
+
+        <textarea id="answer_box" name="query_answer" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="job_id_box">
+          Job
+        </label>
+
+        <input type="text" id="job_id_box" name="query_job_id">
+      </div>
+
+      <button>
+        Create question
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Desc
+        </th>
+
+        <th>
+          Prompt
+        </th>
+
+        <th>
+          Answer
+        </th>
+
+        <th>
+          Job
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_questions.each do |a_question| %>
+      <tr>
+        <td>
+          <%= a_question.id %>
+        </td>
+
+        <td>
+          <%= a_question.desc %>
+        </td>
+
+        <td>
+          <%= a_question.prompt %>
+        </td>
+
+        <td>
+          <%= a_question.answer %>
+        </td>
+
+        <td>
+          <%= a_question.job_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_question.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_question.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/questions/<%= a_question.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

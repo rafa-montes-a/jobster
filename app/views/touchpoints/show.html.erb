@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Touchpoint #<%= @the_touchpoint.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/touchpoints">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_touchpoint/<%= @the_touchpoint.id %>">
+          Delete touchpoint
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_touchpoint.description %>
+      </dd>
+
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @the_touchpoint.date %>
+      </dd>
+
+      <dt>
+        Notes
+      </dt>
+      <dd>
+        <%= @the_touchpoint.notes %>
+      </dd>
+
+      <dt>
+        Contact
+      </dt>
+      <dd>
+        <%= @the_touchpoint.contact_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_touchpoint.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_touchpoint.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit touchpoint
+    </h2>
+
+    <form action="/modify_touchpoint/<%= @the_touchpoint.id %>"  method="post" >
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description" value="<%= @the_touchpoint.description %>">
+      </div>
+
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="time" id="date_box" name="query_date" value="<%= @the_touchpoint.date %>">
+      </div>
+
+      <div>
+        <label for="notes_box">
+          Notes
+        </label>
+
+        <textarea id="notes_box" name="query_notes"><%= @the_touchpoint.notes %></textarea>
+      </div>
+
+      <div>
+        <label for="contact_id_box">
+          Contact
+        </label>
+
+        <input type="text" id="contact_id_box" name="query_contact_id" value="<%= @the_touchpoint.contact_id %>">
+      </div>
+
+      <button>
+        Update touchpoint
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
