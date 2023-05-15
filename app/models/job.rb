@@ -20,4 +20,13 @@
 #  user_id          :integer
 #
 class Job < ApplicationRecord
+  
+  validates(:user_id, { :presence => true })
+  validates(:role, { :presence => true })
+  validates(:firm_name, { :presence => true })
+
+  belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id" })
+  has_many(:questions, { :class_name => "Question", :foreign_key => "job_id", :dependent => :destroy })
+  belongs_to(:firm, { :required => true, :class_name => "Firm", :foreign_key => "firm_id" })
+
 end
