@@ -27,6 +27,7 @@ class Job < ApplicationRecord
 
   belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id" })
   has_many(:questions, { :class_name => "Question", :foreign_key => "job_id", :dependent => :destroy })
-  belongs_to(:firm, { :required => true, :class_name => "Firm", :foreign_key => "firm_id" })
+  #belongs_to(:firm, { :required => true, :class_name => "Firm", :foreign_key => "firm_id" })
+  belongs_to :firm
 
 end

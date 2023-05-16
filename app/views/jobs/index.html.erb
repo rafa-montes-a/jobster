@@ -6,124 +6,57 @@
   </div>
 </div>
 
-<hr>
-
 <div>
   <div>
 
     <form action="/insert_job" method="post">
-      <div>
-        <label for="firm_name_box">
-          Firm name
-        </label>
+      <div class="add_jobs_form">
+        <div>
+          <input type="text" id="firm_name_box" name="query_firm_name" placeholder = "Company*">
+        </div>
 
-        <input type="text" id="firm_name_box" name="query_firm_name">
+        <div>
+          <input type="text" id="role_box" name="query_role" placeholder = "Role*">
+        </div>
+
+        <div>
+          <input type="text" id="job_desc_link_box" name="query_job_desc_link" placeholder = "Link to job description">
+        </div>
+
+        <div>
+          <input type="text" id="follow_up_link_box" name="query_follow_up_link" placeholder = "Link to follow up your application">
+        </div>
+
+        <div>
+          <input type="text" id="job_number_box" name="query_job_number" placeholder = "Job number (e.g.: R008974)">
+        </div>
+
+        <div>
+          <input type="text" id="status_box" name="query_status" placeholder = "Status">
+        </div>
+
+        <div>
+          <input type="text" id="country_box" name="query_country" placeholder = "Country">
+        </div>
+
+        <div>
+          <input type="text" id="state_box" name="query_state" placeholder = "State">
+        </div>
+
+        <div>
+          <input type="text" id="city_box" name="query_city" placeholder = "City">
+        </div>
+
+        <button>
+          Add!
+        </button>
+
       </div>
 
-      <div>
-        <label for="role_box">
-          Role
-        </label>
-
-        <input type="text" id="role_box" name="query_role">
-      </div>
-
-      <div>
-        <label for="job_desc_box">
-          Job desc
-        </label>
-
-        <textarea id="job_desc_box" name="query_job_desc" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="job_desc_link_box">
-          Job desc link
-        </label>
-
-        <input type="text" id="job_desc_link_box" name="query_job_desc_link">
-      </div>
-
-      <div>
-        <label for="follow_up_link_box">
-          Follow up link
-        </label>
-
-        <input type="text" id="follow_up_link_box" name="query_follow_up_link">
-      </div>
-
-      <div>
-        <label for="status_box">
-          Status
-        </label>
-
-        <input type="text" id="status_box" name="query_status">
-      </div>
-
-      <div>
-        <label for="summary_job_desc_box">
-          Summary job desc
-        </label>
-
-        <textarea id="summary_job_desc_box" name="query_summary_job_desc" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label for="country_box">
-          Country
-        </label>
-
-        <input type="text" id="country_box" name="query_country">
-      </div>
-
-      <div>
-        <label for="city_box">
-          City
-        </label>
-
-        <input type="text" id="city_box" name="query_city">
-      </div>
-
-      <div>
-        <label for="state_box">
-          State
-        </label>
-
-        <input type="text" id="state_box" name="query_state">
-      </div>
-
-      <div>
-        <label for="job_number_box">
-          Job number
-        </label>
-
-        <input type="text" id="job_number_box" name="query_job_number">
-      </div>
-
-      <div>
-        <label for="firm_id_box">
-          Firm
-        </label>
-
-        <input type="text" id="firm_id_box" name="query_firm_id">
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
-      </div>
-
-      <button>
-        Create job
-      </button>
     </form>
   </div>
 </div>
 
-<hr>
 <div>
   <div>
     <table border="1">
@@ -271,5 +204,3 @@
     </table>
   </div>
 </div>
-
-<hr>
