@@ -11,41 +11,15 @@
 
     <form action="/insert_job" method="post">
       <div class="add_jobs_form">
-        <div>
-          <input type="text" id="firm_name_box" name="query_firm_name" placeholder = "Company*">
-        </div>
-
-        <div>
-          <input type="text" id="role_box" name="query_role" placeholder = "Role*">
-        </div>
-
-        <div>
-          <input type="text" id="job_desc_link_box" name="query_job_desc_link" placeholder = "Link to job description">
-        </div>
-
-        <div>
-          <input type="text" id="follow_up_link_box" name="query_follow_up_link" placeholder = "Link to follow up your application">
-        </div>
-
-        <div>
-          <input type="text" id="job_number_box" name="query_job_number" placeholder = "Job number (e.g.: R008974)">
-        </div>
-
-        <div>
-          <input type="text" id="status_box" name="query_status" placeholder = "Status">
-        </div>
-
-        <div>
-          <input type="text" id="country_box" name="query_country" placeholder = "Country">
-        </div>
-
-        <div>
-          <input type="text" id="state_box" name="query_state" placeholder = "State">
-        </div>
-
-        <div>
-          <input type="text" id="city_box" name="query_city" placeholder = "City">
-        </div>
+        <div><input type="text" id="firm_name_box" name="query_firm_name" placeholder = "Company*"></div>
+        <div><input type="text" id="role_box" name="query_role" placeholder = "Role*"></div>
+        <div><input type="text" id="job_desc_link_box" name="query_job_desc_link" placeholder = "Link to job description"></div>
+        <div><input type="text" id="follow_up_link_box" name="query_follow_up_link" placeholder = "Link to follow up your application"></div>
+        <div><input type="text" id="job_number_box" name="query_job_number" placeholder = "Job number (e.g.: R008974)"></div>
+        <div><input type="text" id="status_box" name="query_status" placeholder = "Status"></div>
+        <div><input type="text" id="country_box" name="query_country" placeholder = "Country"></div>
+        <div><input type="text" id="state_box" name="query_state" placeholder = "State"></div>
+        <div><input type="text" id="city_box" name="query_city" placeholder = "City"></div>
 
         <button>
           Add!
@@ -129,7 +103,7 @@
         </th>
       </tr>
 
-      <% @list_of_jobs.each do |a_job| %>
+      <% @current_user.jobs.each do |a_job| %>
       <tr>
         <td>
           <%= a_job.id %>
