@@ -23,11 +23,12 @@ class JobsController < ApplicationController
     the_job.role = params.fetch("query_role")
     the_job.job_desc_link = params.fetch("query_job_desc_link")
     the_job.follow_up_link = params.fetch("query_follow_up_link")
-    the_job.status = params.fetch("query_status")
     the_job.country = params.fetch("query_country")
     the_job.state = params.fetch("query_state")
     the_job.city = params.fetch("query_city")
+    the_job.job_desc = params.fetch("query_job_desc")
     the_job.job_number = params.fetch("query_job_number")
+    the_job.status = "Applied"
     the_job.user_id = @current_user.id
 
     if Firm.exists?(firm_name: the_job.firm_name)

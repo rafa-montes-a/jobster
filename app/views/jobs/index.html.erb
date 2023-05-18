@@ -6,30 +6,69 @@
   </div>
 </div>
 
-<div>
-  <div>
+<hr>
 
-    <form action="/insert_job" method="post">
-      <div class="add_jobs_form">
-        <div><input type="text" id="firm_name_box" name="query_firm_name" placeholder = "Company*"></div>
-        <div><input type="text" id="role_box" name="query_role" placeholder = "Role*"></div>
-        <div><input type="text" id="job_desc_link_box" name="query_job_desc_link" placeholder = "Link to job description"></div>
-        <div><input type="text" id="follow_up_link_box" name="query_follow_up_link" placeholder = "Link to follow up your application"></div>
-        <div><input type="text" id="job_number_box" name="query_job_number" placeholder = "Job number (e.g.: R008974)"></div>
-        <div><input type="text" id="status_box" name="query_status" placeholder = "Status"></div>
-        <div><input type="text" id="country_box" name="query_country" placeholder = "Country"></div>
-        <div><input type="text" id="state_box" name="query_state" placeholder = "State"></div>
-        <div><input type="text" id="city_box" name="query_city" placeholder = "City"></div>
+<form action="/insert_job" method="post">
 
-        <button>
-          Add!
-        </button>
+  <div class="row">
+    
+    <div class="col-md-2 mb-3">
+        <label for="firm_name_box" class="form-label">Company*</label>
+        <input id="firm_name_box" name="query_firm_name" type="text" class="form-control">
+    </div>
 
-      </div>
+    <div class="col-md-2 mb-3">
+        <label for="role_box" class="form-label">Role*</label>
+        <input id="role_box" name="query_role" type="text" class="form-control">
+    </div>
 
-    </form>
+    <div class="col-md-2 mb-3">
+        <label for="job_desc_link_box" class="form-label">Link to job description</label>
+        <input id="job_desc_link_box" name="query_job_desc_link" type="text" class="form-control" placeholder="https://jobposting.site">
+    </div>
+
+    <div class="col-md-2 mb-3">
+        <label for="follow_up_link_box" class="form-label">Link to follow up</label>
+        <input id="follow_up_link_box" name="query_follow_up_link" type="text" class="form-control" placeholder="https://company.jobs">
+    </div>
+
+    <div class="col-md-1 mb-3">
+        <label for="job_number_box" class="form-label">Job number</label>
+        <input id="job_number_box" name="query_job_number" type="text" class="form-control" placeholder="R436210">
+    </div>
+
+    <div class="col-md-1 mb-3">
+        <label for="country_box" class="form-label">Country</label>
+        <input id="country_box" name="query_country" type="text" class="form-control" value="USA">
+    </div>
+
+    <div class="col-md-1 mb-3">
+        <label for="state_box" class="form-label">State</label>
+        <input id="state_box" name="query_state" type="text" class="form-control">
+    </div>
+
+    <div class="col-md-1 mb-3">
+        <label for="city_box" class="form-label">City</label>
+        <input id="city_box" name="query_city" type="text" class="form-control">
+    </div>
+
+
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-md-11 mb-3">
+        <input id="job_desc_box" name="query_job_desc" type="text" class="form-control" placeholder ="Paste job description for future use">
+    </div>
+
+    <div class="col-md-1 mb-3 my-auto">
+      <button class="btn btn-primary">Add</button>
+    </div>
+  </div>
+
+</form>
+
+<br>
+
 
 <div>
   <div>

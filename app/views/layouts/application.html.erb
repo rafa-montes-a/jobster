@@ -19,84 +19,15 @@
 
     <style>
 
-      html{
-        min-height:100%;
-        height: fit-content;
-      }
-
-      body{
-        min-height:100%;
-        height: fit-content;
-        padding-left: 0px;
-        box-sizing: border-box;
-        font-family: Sans-Serif;
-        margin:0px;
-        background-color: rgb(255, 255, 255);
-      }
-      
       .banner{
         display: flex;
         padding-left: 100px;
-        padding-right: 100px;
-        background-color: rgb(50, 50, 50);
-        align-items: center;           
+        padding-right: 0px;       
       }    
-
-      .item{
-        margin-left: 10px;
-        margin-right: 10px;
-        padding-bottom: 20px;
-        padding-top: 20px;
-        box-sizing: border-box;
-        color: rgb(255, 255, 255)
-      }
 
       .right{
         margin-left: auto;
       }
-
-      .menu_link{
-        padding-bottom: 20px;
-        padding-top: 20px;
-        box-sizing: border-box;
-        text-decoration: none;
-        color: rgb(200, 200, 200);
-        transition: 0.5s;          
-      }
-
-      .menu_link:hover{
-        color: rgb(255, 255, 255);          
-      }
-
-      .thumbnail{
-        width: 20px;
-        height: 20px;          
-      }
-
-      .site{
-        padding-left: 200px;
-        padding-right: 200px;
-        padding-top: 5px;
-      }
-
-      .add_jobs_form{
-        display: flex;        
-        margin-bottom: 20px;
-        background-color: rgb(255, 255, 255);
-      }
-
-      input[type=text] {
-        padding: 7px;
-        padding-left: 10px;
-        margin-right: 10px;
-        border-radius:20px;
-        border:0;
-        box-shadow:0 0 5px 1px rgba(0,0,0,0.06);
-        width:100px;
-
-      }
-
-
 
     </style>
 
@@ -104,7 +35,7 @@
 
   <body>
 
-<nav class="navbar navbar-expand-lg bg-light banner">
+<nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">Jobster</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,48 +45,35 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
       <div class="navbar-nav">        
-        <a class="nav-link" aria-current="page" href="/jobs">My applications</a>
-        <a class="nav-link" href="/contacts">My contacts</a>
-        <a class="nav-link" href="/firms">My companies</a>
-        <a class="nav-link" href="/touchpoints">| Touchpoints |</a>
-        <a class="nav-link" href="/questions">| Questions |</a>
+        <% if @current_user == nil %>
+            <div>Welcome!</div>
+        <% else %>
+          <a class="nav-link" href="/jobs">My applications</a>
+          <a class="nav-link" href="/contacts">My contacts</a>
+          <a class="nav-link" href="/firms">My companies</a>
+          <a class="nav-link" href="/touchpoints">Touchpoints</a>
+          <a class="nav-link" href="/questions">Questions</a>
+        <% end %>
       </div>
 
+      <div class="navbar-nav right">
+        <% if @current_user == nil %>        
+          <a class="nav-link" href="/user_sign_in">Log in</a>
+          <a class="nav-link" href="/user_sign_up">Create account</a>
+
+        <% else %>
+          <a class="nav-link" href="/edit_user_profile">Hi, <%= @current_user.first_name %> </a>
+          <a class="nav-link" href="/user_sign_out">Log out</a>
+        <% end %>
+
+      </div>
     </div>
   </div>
 </nav>
 
-  <nav class = "banner">
-        
-    <div class = "item">Jobster</div>
-    <div class = "item"><a href = "/jobs" class = "menu_link">My applications<a></div>
-    <div class = "item"><a href = "/contacts" class = "menu_link">My contacts<a></div>
-    <div class = "item"><a href = "/firms" class = "menu_link">My companies<a></div>
-    <div class = "item"><a href = "/touchpoints" class = "menu_link">Touchpoint<a></div>
-    <div class = "item"><a href = "/questions" class = "menu_link">Questions<a></div>
-
-    <% if @current_user == nil %>
-
-      <div class = "item right"><a href = "/user_sign_in" class = "menu_link">Log in<a></div>
-      <div class = "item"><a href = "/user_sign_up" class = "menu_link">Sign up<a></div>
-
-    <% else %>
-
-      <div class = "item right"><a href = "/user_sign_out" class = "menu_link">Log out<a></div>
-      <div class = "item"><a href = "/edit_user_profile" class = "menu_link">Hi, <%= @current_user.first_name %> <a></div>
-
-    <% end %>
-
-    <div class = "item"><img class = "thumbnail" src = "user.png"> </img></div>
-
-  </nav>
-
-  <div class = "site">
-    <p style = color:green><%= notice %></p>
-    <p style = color:red><%= alert %></p>
-  </div>
-
-  <div class = "site">
+  <div class = "container py-5">
+    <p style = "color:green"><%= notice %></p>
+    <p style = "color:red"><%= alert %></p>
     <%= yield %>
   </div>
 

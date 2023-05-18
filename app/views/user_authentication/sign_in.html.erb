@@ -1,23 +1,30 @@
-<h1>Sign in</h1>
+<h1>Welcome to Jobster!</h1>
+
+<hr>
 
 <form action="/user_verify_credentials" method="post">
-  <div>
-    <label for="email_box">Email</label>
-    <input id="email_box" name="query_email" placeholder="Enter your email..." type="text">
+  <div class="row">
+    <div class="col-md-4 mb-3">
+        <label for="email_box" class="form-label">Email address</label>
+        <input id="email_box" name="query_email" placeholder="name@example.com" type="email" class="form-control">
+    </div>
   </div>
 
-  <div>
-    <label for="password_box">Password</label>
-    <input id="password_box" name="query_password" placeholder="Enter your password..." type="password">
+  <div class="row">
+    <div class="col-md-4 mb-3">
+        <label for="password_box" class="form-label">Password</label>
+        <input id="password_box" name="query_password" placeholder="Password" type="password" class="form-control">
+    </div>
   </div>
 
-  <button>
+  <button class="btn btn-primary">
     Sign in
   </button>
+  
 </form>
 
 <hr>
 
 <p>
-  Or, <a href="/user_sign_up">Sign up</a> instead.
+  If you don't have an account <a href="/user_sign_up">Create a new one</a> instead.
 </p>
