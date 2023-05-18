@@ -17,6 +17,16 @@ class JobsController < ApplicationController
     render({ :template => "jobs/show.html.erb" })
   end
 
+  def edit
+    the_id = params.fetch("path_id")
+
+    matching_jobs = Job.where({ :id => the_id })
+
+    @the_job = matching_jobs.at(0)
+
+    render({ :template => "jobs/edit.html.erb" })
+  end
+
   def create
     the_job = Job.new
     the_job.firm_name = params.fetch("query_firm_name")

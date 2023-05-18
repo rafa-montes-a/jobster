@@ -51,6 +51,8 @@ Rails.application.routes.draw do
   get("/contacts", { :controller => "contacts", :action => "index" })
   
   get("/contacts/:path_id", { :controller => "contacts", :action => "show" })
+
+  get("/contacts/edit/:path_id", { :controller => "contacts", :action => "edit" })
   
   # UPDATE
   
@@ -89,6 +91,8 @@ Rails.application.routes.draw do
   get("/jobs", { :controller => "jobs", :action => "index" })
   
   get("/jobs/:path_id", { :controller => "jobs", :action => "show" })
+
+  get("/jobs/edit/:path_id", { :controller => "jobs", :action => "edit" })
   
   # UPDATE
   

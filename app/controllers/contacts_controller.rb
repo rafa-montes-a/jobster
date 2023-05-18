@@ -17,6 +17,16 @@ class ContactsController < ApplicationController
     render({ :template => "contacts/show.html.erb" })
   end
 
+  def show
+    the_id = params.fetch("path_id")
+
+    matching_contacts = Contact.where({ :id => the_id })
+
+    @the_contact = matching_contacts.at(0)
+
+    render({ :template => "contacts/edit.html.erb" })
+  end
+
   def create
     the_contact = Contact.new
     the_contact.first_name = params.fetch("query_first_name")
@@ -24,15 +34,15 @@ class ContactsController < ApplicationController
     the_contact.firm_name = params.fetch("query_firm_name")
     the_contact.role = params.fetch("query_role")
     the_contact.email = params.fetch("query_email")
-    the_contact.status = params.fetch("query_status")
-    the_contact.firm_id = params.fetch("query_firm_id")
-    the_contact.user_id = params.fetch("query_user_id")
+    the_contact.firm_id = @current_user.firms.where({ :firm_name => the_contact.firm_name }).at(0).id
+    the_contact.user_id = @current_user.id
+    the_job_id = params.fetch("query_job_id")
 
     if the_contact.valid?
       the_contact.save
-      redirect_to("/contacts", { :notice => "Contact created successfully." })
+      redirect_to("/jobs/#{the_job_id}", { :notice => "Contact created successfully." })
     else
-      redirect_to("/contacts", { :alert => the_contact.errors.full_messages.to_sentence })
+      redirect_to("/jobs/#{the_job_id}", { :alert => the_contact.errors.full_messages.to_sentence })
     end
   end
 
