@@ -18,6 +18,7 @@ class Contact < ApplicationRecord
   
   validates(:user_id, { :presence => true })
   validates(:first_name, { :presence => true })
+  validates(:firm_name, { :presence => true })
 
   belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id" })
   belongs_to(:firm, { :class_name => "Firm", :foreign_key => "firm_id" })

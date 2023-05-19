@@ -34,6 +34,36 @@ class ContactsController < ApplicationController
     the_contact.firm_name = params.fetch("query_firm_name")
     the_contact.role = params.fetch("query_role")
     the_contact.email = params.fetch("query_email")
+    the_contact.user_id = @current_user.id
+
+    user_firms = @current_user.firms
+
+    if the_contact.valid?
+
+      if user_firms.exists?(firm_name: the_contact.firm_name)
+        the_contact.firm_id = user_firms.find_by(firm_name: the_contact.firm_name).id
+      else
+        the_firm = Firm.new
+        the_firm.firm_name = the_contact.firm_name
+        the_firm.user_id = @current_user.id
+        the_firm.save
+        the_contact.firm_id = the_firm.id
+      end
+
+      the_contact.save
+      redirect_to("/contacts", { :notice => "Contact created successfully." })
+    else
+      redirect_to("/contacts", { :alert => the_contact.errors.full_messages.to_sentence })
+    end
+  end
+
+  def create_from_job
+    the_contact = Contact.new
+    the_contact.first_name = params.fetch("query_first_name")
+    the_contact.last_name = params.fetch("query_last_name")
+    the_contact.firm_name = params.fetch("query_firm_name")
+    the_contact.role = params.fetch("query_role")
+    the_contact.email = params.fetch("query_email")
     the_contact.firm_id = @current_user.firms.where({ :firm_name => the_contact.firm_name }).at(0).id
     the_contact.user_id = @current_user.id
     the_job_id = params.fetch("query_job_id")

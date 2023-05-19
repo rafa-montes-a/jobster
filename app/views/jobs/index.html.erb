@@ -19,19 +19,9 @@
         <input id="role_box" name="query_role" type="text" class="form-control">
     </div>
 
-    <div class="col-md-2 mb-3">
-        <label for="job_desc_link_box" class="form-label">Link to job description</label>
-        <input id="job_desc_link_box" name="query_job_desc_link" type="text" class="form-control" placeholder="https://jobposting.site">
-    </div>
-
-    <div class="col-md-2 mb-3">
-        <label for="follow_up_link_box" class="form-label">Link to follow up</label>
-        <input id="follow_up_link_box" name="query_follow_up_link" type="text" class="form-control" placeholder="https://company.jobs">
-    </div>
-
     <div class="col-md-1 mb-3">
         <label for="job_number_box" class="form-label">Job number</label>
-        <input id="job_number_box" name="query_job_number" type="text" class="form-control" placeholder="R436210">
+        <input id="job_number_box" name="query_job_number" type="text" class="form-control">
     </div>
 
     <div class="col-md-1 mb-3">
@@ -49,12 +39,33 @@
         <input id="city_box" name="query_city" type="text" class="form-control">
     </div>
 
+    <div class="col-md-2 mb-3">
+      <label for="status_box" class="form-label">Status</label>
+      <select id="status_box" name="query_status" class="form-select" aria-label="Default select example">
+        <% @status.each do |a_status| %>
+          <option> <%= a_status %> </option>
+        <% end %>
+      </select>
+    </div>
+
 
   </div>
 
   <div class="row">
-    <div class="col-md-11 mb-3">
-        <input id="job_desc_box" name="query_job_desc" type="text" class="form-control" placeholder ="Paste job description for future use">
+
+    <div class="col-md-2 mb-3">
+      <label for="job_desc_link_box" class="form-label">Link to job description</label>
+      <input id="job_desc_link_box" name="query_job_desc_link" type="text" class="form-control" placeholder="https://jobposting.site">
+    </div>
+
+    <div class="col-md-2 mb-3">
+      <label for="follow_up_link_box" class="form-label">Link to follow up</label>
+      <input id="follow_up_link_box" name="query_follow_up_link" type="text" class="form-control" placeholder="https://company.jobs">
+    </div>
+    
+    <div class="col-md-7 mb-3">
+      <label for="job_desc_box" class="form-label">Paste job description for future use</label>
+      <input id="job_desc_box" name="query_job_desc" type="text" class="form-control">
     </div>
 
     <div class="col-md-1 mb-3 my-auto">
@@ -66,12 +77,21 @@
 
 <br>
 
-<div class="list-group">
-  <button type="button" class="list-group-item list-group-item-action bg-success text-white">Status: Interview</button>
+<% @status.zip(@color).each do |a_status, a_color| %>
 
-  <% @current_user.jobs.each do |a_job| %>
+  
+  <h4> Status: <span class="badge rounded-pill text-bg-<%=a_color%>"> <%= a_status %> </span> </h4>
+  <br>
 
-    <button type="button" class="list-group-item list-group-item-action" onclick="window.location.href='/jobs/<%= a_job.id %>'">
+    <% if @current_user.jobs.where({ :status => a_status }).count == 0 %>
+      You don't have job applications in this category yet.
+    <% else %>
+    <% end %>
+
+  
+  <div class="list-group">
+    <% @current_user.jobs.where({ :status => a_status }).order({ :updated_at => :desc }).each do |a_job| %>
+      <button type="button" class="list-group-item list-group-item-action" onclick="window.location.href='/jobs/<%= a_job.id %>'">
       
       <div class="col">
         <div class="row d-flex justify-content-between">
@@ -108,4 +128,7 @@
     </button>
   <% end %>
 
-</div>
+  </div>
+  <br>
+
+<% end %>

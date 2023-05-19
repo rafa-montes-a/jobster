@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   
   # Uncomment line 5 in this file and line 3 in UserAuthenticationController if you want to force users to sign in before any other actions.
   before_action(:force_user_sign_in)
+
+  before_action(:define_status)
   
   def load_current_user
     the_id = session[:user_id]
@@ -14,6 +16,11 @@ class ApplicationController < ActionController::Base
     if @current_user == nil
       redirect_to("/user_sign_in", { :notice => "You have to sign in first." })
     end
+  end
+
+  def define_status
+    @status = ["Interview", "Applied", "Rejected"]
+    @color = ["success", "warning", "danger"]
   end
 
 end

@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_contact", { :controller => "contacts", :action => "create" })
+  post("/insert_contact_from_job", { :controller => "contacts", :action => "create_from_job" })
           
   # READ
   get("/contacts", { :controller => "contacts", :action => "index" })
@@ -97,6 +98,7 @@ Rails.application.routes.draw do
   # UPDATE
   
   post("/modify_job/:path_id", { :controller => "jobs", :action => "update" })
+  post("/modify_status_from_job/:path_id", { :controller => "jobs", :action => "update_from_job" })
   
   # DELETE
   get("/delete_job/:path_id", { :controller => "jobs", :action => "destroy" })

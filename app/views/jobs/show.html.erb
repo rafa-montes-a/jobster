@@ -1,33 +1,39 @@
 
   
   <div>
-    <p><a href="/jobs" class="btn btn-light btn-sm">Go back to My Applications</button></a></p>
+    <p><a href="/jobs" class="btn btn-outline-primary btn-sm">Go back to My Applications</button></a></p>
   </div>
 
 <div class="col-sm-12">
   <div class="card">
     <h5 class="card-header">About the role</h5>
       <div class="card-body">
-        <h5 class="card-title"><%= @the_job.role %> @ <%= @the_job.firm_name %></h5>
+        <h5 class="card-title"><%= @the_job.role %> @ <%= @the_job.firm_name %> 
+          <span class="badge rounded-pill text-bg-<%= @color.at(@status.index(@the_job.status)) %>"> <%= @the_job.status %></span> 
+        </h5>
 
+        <p> <%= @the_job.country %> <%= @the_job.state %> <%= @the_job.city %> </p>
+         
+      <form action="/modify_status_from_job/<%= @the_job.id %>" method="post">
+        <div class="row">
+          
+          <div class="col-md-2 mb-3">
+            <label for="status_box" class="form-label">Status</label>
+            <select id="status_box" name="query_status" class="form-select form-select-sm">
+              <% @status.each do |a_status| %>
+                <option  <%= 'selected' if a_status == @the_job.status %> > <%= a_status %> </option>
+              <% end %>
+            </select>
+          </div> 
 
-        <%= @the_job.country %> <%= @the_job.state %> <%= @the_job.city %>
+          <div class="col-md-1 mb-3 my-auto">
+            <button class="btn btn-outline-primary btn-sm">Update</button>
+          </div>
 
-        <p> 
+        </div>
+      </form>
+      
         
-        Status: 
-
-        <% if @the_job.status == "Applied" %>
-            <span class="badge rounded-pill text-bg-warning"> <%= @the_job.status %></span>
-          <% elsif @the_job.status == "Interview" %>
-            <span class="badge rounded-pill text-bg-success"> <%= @the_job.status %></span>
-          <% elsif @the_job.status == "Rejected" %>
-            <span class="badge rounded-pill text-bg-danger"> <%= @the_job.status %></span>
-          <% else %>
-            <span class="badge rounded-pill text-bg-secondary"> <%= @the_job.status %></span>
-          <% end %>
-        
-        </p>
 
 
         <hr>
@@ -35,15 +41,15 @@
 
           <div class="col">
             <% if @the_job.job_desc_link.nil? || @the_job.job_desc_link.blank? %>
-              <a href="#" class="btn btn-light btn-sm">Original job description</a>
+              <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Original job description</button>
               <% else %>
-                <a href="<%= @the_job.job_desc_link %>" target="blank" class="btn btn-light btn-sm">Original job description</a>  
+                <a href="<%= @the_job.job_desc_link %>" target="blank" class="btn btn-secondary btn-sm">Original job description</a>  
               <% end %>
             
             <% if @the_job.follow_up_link.nil? || @the_job.follow_up_link.blank? %>
-              <a href="#" class="btn btn-light btn-sm">Follow up: Go to company's job portal</a>
+              <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Follow up: Go to company's job portal</a>
               <% else %>
-                <a href="<%= @the_job.follow_up_link %>" target="blank" class="btn btn-light btn-sm">Follow up: Go to company's job portal</a>
+                <a href="<%= @the_job.follow_up_link %>" target="blank" class="btn btn-secondary btn-sm">Follow up: Go to company's job portal</a>
               <% end %>
           </div>
 
@@ -63,7 +69,7 @@
     <h5 class="card-header">My contacts @ <%= @the_job.firm_name %> </h5>
       <div class="card-body">
 
-      <form action="/insert_contact" method="post">
+      <form action="/insert_contact_from_job" method="post">
 
         <div class="row">
         
