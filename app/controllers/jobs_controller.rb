@@ -87,11 +87,81 @@ class JobsController < ApplicationController
     end
   end
 
-  def update_from_job
+  def update_to_interview
     the_id = params.fetch("path_id")
     the_job = Job.where({ :id => the_id }).at(0)
 
-    the_job.status = params.fetch("query_status")
+    the_job.status = "Interview"
+
+    if the_job.valid?
+      the_job.save
+      redirect_to("/", { :notice => "Job updated successfully."} )
+    else
+      redirect_to("/", { :alert => the_job.errors.full_messages.to_sentence })
+    end
+  end
+
+  def update_to_applied
+    the_id = params.fetch("path_id")
+    the_job = Job.where({ :id => the_id }).at(0)
+
+    the_job.status = "Applied"
+
+    if the_job.valid?
+      the_job.save
+      redirect_to("/", { :notice => "Job updated successfully."} )
+    else
+      redirect_to("/", { :alert => the_job.errors.full_messages.to_sentence })
+    end
+  end
+
+  def update_to_rejected
+    the_id = params.fetch("path_id")
+    the_job = Job.where({ :id => the_id }).at(0)
+
+    the_job.status = "Rejected"
+
+    if the_job.valid?
+      the_job.save
+      redirect_to("/", { :notice => "Job updated successfully."} )
+    else
+      redirect_to("/", { :alert => the_job.errors.full_messages.to_sentence })
+    end
+  end
+
+  def update_to_interview_from_job
+    the_id = params.fetch("path_id")
+    the_job = Job.where({ :id => the_id }).at(0)
+
+    the_job.status = "Interview"
+
+    if the_job.valid?
+      the_job.save
+      redirect_to("/jobs/#{the_job.id}", { :notice => "Job updated successfully."} )
+    else
+      redirect_to("/jobs/#{the_job.id}", { :alert => the_job.errors.full_messages.to_sentence })
+    end
+  end
+
+  def update_to_applied_from_job
+    the_id = params.fetch("path_id")
+    the_job = Job.where({ :id => the_id }).at(0)
+
+    the_job.status = "Applied"
+
+    if the_job.valid?
+      the_job.save
+      redirect_to("/jobs/#{the_job.id}", { :notice => "Job updated successfully."} )
+    else
+      redirect_to("/jobs/#{the_job.id}", { :alert => the_job.errors.full_messages.to_sentence })
+    end
+  end
+
+  def update_to_rejected_from_job
+    the_id = params.fetch("path_id")
+    the_job = Job.where({ :id => the_id }).at(0)
+
+    the_job.status = "Rejected"
 
     if the_job.valid?
       the_job.save

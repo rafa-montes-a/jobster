@@ -15,10 +15,29 @@
 
     <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Bootstrap Icons CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+     <script>
+      function confirmDelete() {
+        var confirmation = confirm('Are you sure you want to delete this item?');
+        if (confirmation) {
+          // Proceed with the deletion action
+          return true;
+        } else {
+          // Cancel the deletion action and redirect to a specific URL
+           event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+      }
+      </script>
+
+      
+    
     <style>
 
       .banner{
@@ -31,6 +50,13 @@
         margin-left: auto;
       }
 
+      .parent-button{
+        
+      }
+
+      .cancel-button{
+        
+      }
     </style>
 
   </head>
@@ -74,8 +100,21 @@
 </nav>
 
   <div class = "container py-5">
-    <p style = "color:green"><%= notice %></p>
-    <p style = "color:red"><%= alert %></p>
+    
+    <% if notice == nil %>
+    <% else %>
+      <div class="alert alert-success">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert == nil %>
+    <% else %>
+      <div class="alert alert-danger">
+        <%= alert %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </div>
 

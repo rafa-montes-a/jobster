@@ -6,40 +6,35 @@
 
 <div class="col-sm-12">
   <div class="card">
-    <h5 class="card-header">About the role</h5>
-      <div class="card-body">
-        <h5 class="card-title"><%= @the_job.role %> @ <%= @the_job.firm_name %> 
-          <span class="badge rounded-pill text-bg-<%= @color.at(@status.index(@the_job.status)) %>"> <%= @the_job.status %></span> 
-        </h5>
-
-        <p> <%= @the_job.country %> <%= @the_job.state %> <%= @the_job.city %> </p>
-         
-      <form action="/modify_status_from_job/<%= @the_job.id %>" method="post">
-        <div class="row">
-          
-          <div class="col-md-2 mb-3">
-            <label for="status_box" class="form-label">Status</label>
-            <select id="status_box" name="query_status" class="form-select form-select-sm">
-              <% @status.each do |a_status| %>
-                <option  <%= 'selected' if a_status == @the_job.status %> > <%= a_status %> </option>
-              <% end %>
-            </select>
-          </div> 
-
-          <div class="col-md-1 mb-3 my-auto">
-            <button class="btn btn-outline-primary btn-sm">Update</button>
+    <h5 class="card-header">
+      <div class="row d-flex justify-content-between">          
+          <div class="col">
+            <%= @the_job.role %> @ <%= @the_job.firm_name %> 
+            <span class="badge rounded-pill text-bg-<%= @color.at(@status.index(@the_job.status)) %>"> <%= @the_job.status %></span>
           </div>
-
+         
+          <div class="col-md-3 text-end">
+            <a href="/modify_status_to_interview_from_job/<%= @the_job.id %>" title="Interview" class="btn btn-outline-success btn-sm"> <i class="bi bi-emoji-smile"></i> </a>
+            <a href="/modify_status_to_applied_from_job/<%= @the_job.id %>" title="Applied" class="btn btn-outline-warning btn-sm"> <i class="bi bi-send-check"></i> </a>
+            <a href="/modify_status_to_rejected_from_job/<%= @the_job.id %>" title="Rejected" class="btn btn-outline-danger btn-sm"> <i class="bi bi-emoji-frown"></i> </a>
+            <a href="/jobs/edit/<%= @the_job.id %>" title="Edit job" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+            <a href="/delete_job/<%= @the_job.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= @the_job.id %>)" > <i class="bi bi-x-circle"></i> </a>
+          </div>
         </div>
-      </form>
-      
-        
+    </h5>
 
 
-        <hr>
+    <div class="card-body">
+      <p> 
+        <%= @the_job.city %> 
+        <%= @the_job.state %> 
+        <%= @the_job.country %> 
+      </p>      
+
         <div class="row">
 
           <div class="col">
+
             <% if @the_job.job_desc_link.nil? || @the_job.job_desc_link.blank? %>
               <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Original job description</button>
               <% else %>
@@ -51,10 +46,6 @@
               <% else %>
                 <a href="<%= @the_job.follow_up_link %>" target="blank" class="btn btn-secondary btn-sm">Follow up: Go to company's job portal</a>
               <% end %>
-          </div>
-
-          <div class="col text-end">
-            <a href="/jobs/edit/<%= @the_job.id %>" class="btn btn-primary text-end">Edit role</a>
           </div>
 
         </div>
@@ -117,28 +108,24 @@
           <div class="col">
             <div class="row d-flex justify-content-between">
           
-              <div class="col-md-2">
+              <div class="col-md-2 text-truncate">
                 <%= a_contact.first_name %> <%= a_contact.last_name %>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-md-2 text-truncate">
                 <%= a_contact.role %>
               </div>
 
-              <div class="col-md-2">
+              <div class="col-md-2 text-truncate">
                 <%= a_contact.email %>
               </div>
 
-              <div class="col-md-1">
-                <% if a_contact.touchpoints.count == 0 %>
-                  <span class="badge rounded-pill text-bg-secondary"><%= a_contact.touchpoints.count %> touchpoints</span>
-                <% else %>
-                  <span class="badge rounded-pill text-bg-ssuccess"><%= a_contact.touchpoints.count %> touchpoints</span>             
-                <% end %>
+              <div class="col-md-1">              
+                <span class="badge rounded-pill text-bg-light"><%= a_contact.touchpoints.count %> touchpoints</span>            
               </div>
 
               <div class="col-md-2 text-end">
-                <a href="/contacts/edit/<%= a_contact.id %>" class="btn btn-secondary btn-sm">Edit</a>
+                <a href="/contacts/edit/<%= a_contact.id %>"  title="Edit contact"class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
               </div>                 
 
             </div>

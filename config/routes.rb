@@ -100,6 +100,14 @@ Rails.application.routes.draw do
   post("/modify_job/:path_id", { :controller => "jobs", :action => "update" })
   post("/modify_status_from_job/:path_id", { :controller => "jobs", :action => "update_from_job" })
   
+  get("/modify_status_to_interview/:path_id", { :controller => "jobs", :action => "update_to_interview" })
+  get("/modify_status_to_applied/:path_id", { :controller => "jobs", :action => "update_to_applied" })
+  get("/modify_status_to_rejected/:path_id", { :controller => "jobs", :action => "update_to_rejected" })
+
+  get("/modify_status_to_interview_from_job/:path_id", { :controller => "jobs", :action => "update_to_interview_from_job" })
+  get("/modify_status_to_applied_from_job/:path_id", { :controller => "jobs", :action => "update_to_applied_from_job" })
+  get("/modify_status_to_rejected_from_job/:path_id", { :controller => "jobs", :action => "update_to_rejected_from_job" })
+  
   # DELETE
   get("/delete_job/:path_id", { :controller => "jobs", :action => "destroy" })
 
