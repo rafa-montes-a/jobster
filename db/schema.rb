@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_15_212229) do
+ActiveRecord::Schema.define(version: 2023_05_21_053317) do
 
   create_table "contacts", force: :cascade do |t|
     t.string "first_name"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2023_05_15_212229) do
 
   create_table "touchpoints", force: :cascade do |t|
     t.string "description"
-    t.time "date"
+    t.datetime "date", precision: 6
     t.text "notes"
     t.integer "contact_id"
     t.datetime "created_at", precision: 6, null: false
