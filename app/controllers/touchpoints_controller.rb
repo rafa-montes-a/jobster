@@ -26,9 +26,9 @@ class TouchpointsController < ApplicationController
 
     if the_touchpoint.valid?
       the_touchpoint.save
-      redirect_to("/touchpoints", { :notice => "Touchpoint created successfully." })
+      redirect_to("/contacts/#{the_touchpoint.contact_id}", { :notice => "Touchpoint created successfully." })
     else
-      redirect_to("/touchpoints", { :alert => the_touchpoint.errors.full_messages.to_sentence })
+      redirect_to("/contacts/#{the_touchpoint.contact_id}", { :alert => the_touchpoint.errors.full_messages.to_sentence })
     end
   end
 
@@ -52,9 +52,10 @@ class TouchpointsController < ApplicationController
   def destroy
     the_id = params.fetch("path_id")
     the_touchpoint = Touchpoint.where({ :id => the_id }).at(0)
+    contact_id = the_touchpoint.contact_id
 
     the_touchpoint.destroy
 
-    redirect_to("/touchpoints", { :notice => "Touchpoint deleted successfully."} )
+    redirect_to("/contacts/show/#{contact_id}", { :notice => "Touchpoint deleted successfully."} )
   end
 end

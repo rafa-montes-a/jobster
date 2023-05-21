@@ -35,7 +35,6 @@
         }
       }
       </script>
-
       
     
     <style>
@@ -101,19 +100,23 @@
 
   <div class = "container py-5">
     
+    <!--
     <% if notice == nil %>
     <% else %>
-      <div class="alert alert-success">
-        <%= notice %>
+      <div class="alert alert-success d-flex justify-content-between">
+        <div class="col"><%= notice %></div>
+        <div class="col text-end"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
       </div>
     <% end %>
 
     <% if alert == nil %>
     <% else %>
-      <div class="alert alert-danger">
-        <%= alert %>
+      <div class="alert alert-danger d-flex justify-content-between">
+        <div class="col"><%= alert %></div>
+        <div class="col text-end"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
       </div>
     <% end %>
+    -->
 
     <%= yield %>
   </div>

@@ -1,8 +1,4 @@
 
-  
-  <div>
-    <p><a href="/jobs" class="btn btn-outline-primary btn-sm">Go back to My Applications</button></a></p>
-  </div>
 
 <div class="col-sm-12">
   <div class="card">
@@ -25,11 +21,22 @@
 
 
     <div class="card-body">
-      <p> 
-        <%= @the_job.city %> 
-        <%= @the_job.state %> 
-        <%= @the_job.country %> 
-      </p>      
+      
+      <div>
+        <% if @the_job.job_number.nil? || @the_job.job_number.blank? %>
+          <p class="opacity-25"> <strong> Job number: </strong> </p>
+        <% else %>
+          <p> <strong> Job number: </strong> <%= @the_job.job_number %> </p>
+        <% end %>
+      </div>
+
+      <div>
+        <% if (@the_job.city.nil? || @the_job.city.blank?) && (@the_job.state.nil? || @the_job.state.blank?) && (@the_job.country.nil? || @the_job.country.blank?) %>
+          <p class="opacity-50"> Location: </p>
+        <% else %>
+          <p> <strong> Location: </strong> <%= @the_job.city %> <%= @the_job.state %> <%= @the_job.country %> </p>   
+        <% end %>
+      </div>      
 
         <div class="row">
 
@@ -64,27 +71,27 @@
 
         <div class="row">
         
-          <div class="col-md-2 mb-3">
+          <div class="col mb-3">
               <label for="first_name_box" class="form-label">First name*</label>
               <input id="first_name_box" name="query_first_name" type="text" class="form-control">
           </div>     
 
-          <div class="col-md-2 mb-3">
+          <div class="col mb-3">
               <label for="last_name_box" class="form-label">Last name*</label>
               <input id="last_name_box" name="query_last_name" type="text" class="form-control">
           </div>    
 
-          <div class="col-md-2 mb-3">
+          <div class="col mb-3">
               <label for="role_box" class="form-label">Role</label>
               <input id="role_box" name="query_role" type="text" class="form-control">
           </div>    
 
-          <div class="col-md-2 mb-3">
+          <div class="col mb-3">
               <label for="email_box" class="form-label">Email</label>
               <input id="email_box" name="query_email" type="email" class="form-control">
           </div>    
 
-          <div class="col-md-2 mb-3">
+          <div class="col-md-3 mb-3">
               <label for="firm_name_box" class="form-label">Company</label>
               <input id="firm_name_box" name="query_firm_name" type="text" class="form-control" value="<%= @the_job.firm_name %>">
           </div>    
@@ -126,6 +133,7 @@
 
               <div class="col-md-2 text-end">
                 <a href="/contacts/edit/<%= a_contact.id %>"  title="Edit contact"class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
+                <a href="/delete_contact_from_job/<%= a_contact.id %>/<%= @the_job.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_contact.id %>)" > <i class="bi bi-x-circle"></i> </a>
               </div>                 
 
             </div>

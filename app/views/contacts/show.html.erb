@@ -1,97 +1,122 @@
-<div>
-  <div>
-    <h1>
-      Contact #<%= @the_contact.id %> details
-    </h1>
 
-    <div>
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">
+      <div class="row d-flex justify-content-between">          
+          <div class="col">
+            <%= @the_contact.first_name %> <%= @the_contact.last_name %>
+          </div>
+         
+          <div class="col-md-3 text-end">
+            <a href="/contacts/edit/<%= @the_contact.id %>" title="Edit contact" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+              <a href="/delete_contact/<%= @the_contact.id %>>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= @the_contact.id %>)" > <i class="bi bi-x-circle"></i> </a>
+            
+            
+          </div>
+        </div>
+    </h5>
+
+
+    <div class="card-body">
+      
       <div>
-        <a href="/contacts">
-          Go back
-        </a>
+        <% if @the_contact.firm_name.nil? || @the_contact.firm_name.blank? %>
+          <p class="opacity-25"> <strong> JCompany: </strong> </p>
+        <% else %>
+          <p> <strong> Company: </strong> <%= @the_contact.firm_name %> </p>
+        <% end %>
       </div>
 
       <div>
-        <a href="/delete_contact/<%= @the_contact.id %>">
-          Delete contact
-        </a>
+        <% if @the_contact.role.nil? || @the_contact.role.blank? %>
+          <p class="opacity-25"> <strong> Role: </strong> </p>
+        <% else %>
+          <p> <strong> Role: </strong> <%= @the_contact.role %> </p>
+        <% end %>
       </div>
+      
+      <div>
+        <% if @the_contact.email.nil? || @the_contact.email.blank? %>
+          <p class="opacity-25"> <strong> Email: </strong> </p>
+        <% else %>
+          <p> <strong> Email: </strong> <%= @the_contact.email %> </p>
+        <% end %>
+      </div>
+
     </div>
-
-    <dl>
-      <dt>
-        First name
-      </dt>
-      <dd>
-        <%= @the_contact.first_name %>
-      </dd>
-
-      <dt>
-        Last name
-      </dt>
-      <dd>
-        <%= @the_contact.last_name %>
-      </dd>
-
-      <dt>
-        Firm name
-      </dt>
-      <dd>
-        <%= @the_contact.firm_name %>
-      </dd>
-
-      <dt>
-        Role
-      </dt>
-      <dd>
-        <%= @the_contact.role %>
-      </dd>
-
-      <dt>
-        Email
-      </dt>
-      <dd>
-        <%= @the_contact.email %>
-      </dd>
-
-      <dt>
-        Status
-      </dt>
-      <dd>
-        <%= @the_contact.status %>
-      </dd>
-
-      <dt>
-        Firm
-      </dt>
-      <dd>
-        <%= @the_contact.firm_id %>
-      </dd>
-
-      <dt>
-        User
-      </dt>
-      <dd>
-        <%= @the_contact.user_id %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_contact.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_contact.updated_at) %> ago
-      </dd>
-    </dl>
   </div>
 </div>
 
-<hr>
+<br>
 
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">My touchpoints with <%= @the_contact.first_name %> <%= @the_contact.last_name %></h5>
+      <div class="card-body">
 
+        <form action="/insert_touchpoint" method="post" class="form-floating">
+
+          <div class="row">
+          
+            <div class="col-md-2 mb-3">
+                <label for="description_box" class="form-label">Description</label>
+                <input id="description_box" name="query_description" type="text" class="form-control">
+            </div>     
+
+            <div class="col-md-2 mb-3">
+                <label for="date_box" class="form-label">Date</label>
+                <input id="date_box" name="query_date" type="date" class="form-control">
+            </div>
+
+            <input id="contact_id_box" name="query_contact_id" type="hidden" class="form-control" value="<%= @the_contact.id%>">
+
+            <div class="col mb-3">
+                <textarea id="notes_box" name="query_notes" type="text" class="form-control h-100" placeholder="Notes from the meeting"></textarea>
+            </div>    
+
+            <div class="col-md-1 mb-3 my-auto text-end">
+              <button class="btn btn-primary">Add</button>
+            </div>
+
+          </div>
+
+        </form>
+
+        
+        <div class="accordion" id="accordionExample">
+
+          <% @the_contact.touchpoints.each do |a_touchpoint| %>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading<%= a_touchpoint.id %>">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= a_touchpoint.id %>" aria-expanded="false" aria-controls="collapse<%= a_touchpoint.id %>">
+
+                    <div class="col">                    
+                      <strong> <%= a_touchpoint.description %> </strong>
+                    </div>
+
+                    <div class="col text-end me-3"> 
+                      <a href="/touchpoints/<%= a_touchpoint.id %>" title="Edit job" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                      <a href="/delete_touchpoint/<%= a_touchpoint.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_touchpoint.id %>)" > <i class="bi bi-x-circle"></i> </a>
+                    </div>
+
+                </button>
+              </h2>
+              <div id="collapse<%= a_touchpoint.id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= a_touchpoint.id %>" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  
+                  <%= a_touchpoint.notes %>
+
+                </div>
+              </div>
+            </div>
+
+          <% end %>
+
+        </div>  
+        
+
+        
+      </div>
+  </div>
+</div>

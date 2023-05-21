@@ -1,7 +1,7 @@
 
-<h1>
+<h2>
   My job applications
-</h1>
+</h2>
 
 <hr>
 
@@ -9,130 +9,117 @@
 
   <div class="row">
     
-    <div class="col-md-2 mb-3">
+    <div class="col mb-3">
         <label for="firm_name_box" class="form-label text-truncate">Company*</label>
         <input id="firm_name_box" name="query_firm_name" type="text" class="form-control">
     </div>
 
-    <div class="col-md-2 mb-3">
+    <div class="col mb-3">
         <label for="role_box" class="form-label text-truncate">Role*</label>
         <input id="role_box" name="query_role" type="text" class="form-control">
     </div>
 
-    <div class="col-md-1 mb-3">
+    <div class="col mb-3">
         <label for="job_number_box" class="form-label text-truncate">Job number</label>
         <input id="job_number_box" name="query_job_number" type="text" class="form-control">
     </div>
 
-    <div class="col-md-1 mb-3">
+    <div class="col mb-3">
         <label for="country_box" class="form-label text-truncate">Country</label>
         <input id="country_box" name="query_country" type="text" class="form-control" value="USA">
     </div>
 
-    <div class="col-md-1 mb-3">
+    <div class="col mb-3">
         <label for="state_box" class="form-label text-truncate">State</label>
         <input id="state_box" name="query_state" type="text" class="form-control">
     </div>
 
-    <div class="col-md-1 mb-3">
+    <div class="col mb-3">
         <label for="city_box" class="form-label text-truncate">City</label>
         <input id="city_box" name="query_city" type="text" class="form-control">
     </div>
 
-    <div class="col-md-2 mb-3">
+    <div class="col mb-3">
       <label for="status_box" class="form-label text-truncate">Status</label>
       <select id="status_box" name="query_status" class="form-select" aria-label="Default select example">
         <% @status.each do |a_status| %>
-          <option> <%= a_status %> </option>
+          <option <%= 'selected' if a_status == "Applied" %> > <%= a_status %> </option>
         <% end %>
       </select>
     </div>
 
-
-  </div>
-
-  <div class="row">
-
-    <div class="col-md-2 mb-3">
+    <div class="col mb-3">
       <label for="job_desc_link_box" class="form-label text-truncate">Link to job description</label>
       <input id="job_desc_link_box" name="query_job_desc_link" type="text" class="form-control" placeholder="https://jobposting.site">
     </div>
 
-    <div class="col-md-2 mb-3">
+    <div class="col mb-3">
       <label for="follow_up_link_box" class="form-label text-truncate">Link to follow up</label>
       <input id="follow_up_link_box" name="query_follow_up_link" type="text" class="form-control" placeholder="https://company.jobs">
-    </div>
-    
-    <div class="col-md-7 mb-3">
-      <label for="job_desc_box" class="form-label text-truncate">Paste job description for future use</label>
-      <input id="job_desc_box" name="query_job_desc" type="text" class="form-control">
     </div>
 
     <div class="col-md-1 mb-3 my-auto">
       <button class="btn btn-primary text-truncate">Add job</button>
     </div>
-  </div>
-
+  
 </form>
 
+<hr>
 <br>
 
 <% @status.zip(@color).each do |a_status, a_color| %>
-
   
+<div>
   <h5> Status: <span class="badge rounded-pill text-bg-<%=a_color%>"> <%= a_status %>: <%=@current_user.jobs.where({ :status => a_status }).count%> </span> </h5>
-  <br>
 
     <% if @current_user.jobs.where({ :status => a_status }).count == 0 %>
       You don't have job applications in this category yet.
     <% else %>
     <% end %>
 
+  <br>
   
   <div class="list-group">
     <% @current_user.jobs.where({ :status => a_status }).order({ :updated_at => :desc }).each do |a_job| %>
       <button type="button" class="list-group-item list-group-item-action parent-button" onclick="window.location.href='/jobs/<%= a_job.id %>'">
-      
-      <div class="col">
-        <div class="row d-flex justify-content-between">
-          
-          <div class="col-md-2 text-truncate">
-              <%= a_job.firm_name %>
+        <div class="col">
+          <div class="row d-flex justify-content-between">
+            
+            <div class="col-md-2 text-truncate">
+                <%= a_job.firm_name %>
+            </div>
+
+            <div class="col-md-2 text-truncate">
+              <%= a_job.role %>
+            </div>
+
+            <div class="col-md-2 text-truncate">
+              <%= a_job.city %> 
+              <%= a_job.state %> 
+              <%= a_job.country %>             
+            </div>
+
+            <div class="col-md-1 ">
+              <span class="badge rounded-pill text-bg-light"> <%= @current_user.contacts.where({ :firm_id => a_job.firm_id }).count %> contacts</span>
+            </div>
+
+            <div class="col-md-2 text-end">
+              <a href="/modify_status_to_interview/<%= a_job.id %>" title="Interview" class="btn btn-outline-success btn-sm"> <i class="bi bi-emoji-smile"></i> </a>
+              <a href="/modify_status_to_applied/<%= a_job.id %>" title="Applied" class="btn btn-outline-warning btn-sm"> <i class="bi bi-send-check"></i> </a>
+              <a href="/modify_status_to_rejected/<%= a_job.id %>" title="Rejected" class="btn btn-outline-danger btn-sm"> <i class="bi bi-emoji-frown"></i> </a>            
+            </div>
+
+            <div class="col-md-1 text-end">
+              <a href="/jobs/edit/<%= a_job.id %>" title="Edit job" class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
+              <a href="/delete_job/<%= a_job.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_job.id %>)" > <i class="bi bi-x-circle"></i> </a>
+            </div>   
           </div>
-
-          <div class="col-md-2 text-truncate">
-            <%= a_job.role %>
-          </div>
-
-          <div class="col-md-2 text-truncate">
-            <%= a_job.city %> 
-            <%= a_job.state %> 
-            <%= a_job.country %>             
-          </div>
-
-          <div class="col-md-1 ">
-            <span class="badge rounded-pill text-bg-light"> <%= @current_user.contacts.where({ :firm_id => a_job.firm_id }).count %> contacts</span>
-          </div>
-
-          <div class="col-md-2 text-end">
-            <a href="/modify_status_to_interview/<%= a_job.id %>" title="Interview" class="btn btn-outline-success btn-sm"> <i class="bi bi-emoji-smile"></i> </a>
-            <a href="/modify_status_to_applied/<%= a_job.id %>" title="Applied" class="btn btn-outline-warning btn-sm"> <i class="bi bi-send-check"></i> </a>
-            <a href="/modify_status_to_rejected/<%= a_job.id %>" title="Rejected" class="btn btn-outline-danger btn-sm"> <i class="bi bi-emoji-frown"></i> </a>            
-          </div>
-
-          <div class="col-md-1 text-end">
-            <a href="/jobs/edit/<%= a_job.id %>" title="Edit job" class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
-            <a href="/delete_job/<%= a_job.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_job.id %>)" > <i class="bi bi-x-circle"></i> </a>
-          </div>   
-
-      </div>
-      
+        </div>    
+      </button>
+    <% end %>
     
-    </button>
-    
-  <% end %>
-
   </div>
-  <br>
-
+  <br><br>
+</div>
+  
 <% end %>

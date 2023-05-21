@@ -1,132 +1,77 @@
 
-      <div>
-        <a href="/jobs/<%= @the_job.id %>">
-          Back to job
-        </a>
-      </div>
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">
+      <div class="row d-flex justify-content-between">          
+          <div class="col">
+            <%= @the_job.role %> @ <%= @the_job.firm_name %> 
+            <span class="badge rounded-pill text-bg-<%= @color.at(@status.index(@the_job.status)) %>"> <%= @the_job.status %></span>
+          </div>
+         
+          <div class="col-md-3 text-end">
+            <a href="/modify_status_to_interview_from_edit/<%= @the_job.id %>" title="Interview" class="btn btn-outline-success btn-sm"> <i class="bi bi-emoji-smile"></i> </a>
+            <a href="/modify_status_to_applied_from_edit/<%= @the_job.id %>" title="Applied" class="btn btn-outline-warning btn-sm"> <i class="bi bi-send-check"></i> </a>
+            <a href="/modify_status_to_rejected_from_edit/<%= @the_job.id %>" title="Rejected" class="btn btn-outline-danger btn-sm"> <i class="bi bi-emoji-frown"></i> </a>            
+            <a href="/delete_job/<%= @the_job.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= @the_job.id %>)" > <i class="bi bi-x-circle"></i> </a>
+          </div>
+        </div>
+    </h5>
 
-<div>
-  <div>
-    <h2>
-      Edit <%= @the_job.role %> at <%= @the_job.firm_name %>
-    </h2>
+    <div class="card-body">
 
-    <form action="/modify_job/<%= @the_job.id %>"  method="post" >
-      <div>
-        <label for="firm_name_box">
-          Firm name
-        </label>
+      <form action="/modify_job/<%= @the_job.id %>"  method="post" >
+          
+          <div class="col-md-4 mb-3">
+            <label for="firm_name_box" class="form-label text-truncate">Company*</label>
+            <input id="firm_name_box" name="query_firm_name" type="text" class="form-control" value="<%= @the_job.firm_name%>">
+          </div>
 
-        <input type="text" id="firm_name_box" name="query_firm_name" value="<%= @the_job.firm_name %>">
-      </div>
+          <div class="col-md-4 mb-3">
+            <label for="role_box" class="form-label text-truncate">Role*</label>
+            <input id="role_box" name="query_role" type="text" class="form-control" value="<%= @the_job.role%>">
+          </div>
 
-      <div>
-        <label for="role_box">
-          Role
-        </label>
+          <div class="col-md-4 mb-3">
+            <label for="job_number_box" class="form-label text-truncate">Job number</label>
+            <input id="job_number_box" name="query_job_number" type="text" class="form-control" value="<%= @the_job.job_number%>">
+          </div>
 
-        <input type="text" id="role_box" name="query_role" value="<%= @the_job.role %>">
-      </div>
+          <div class="col-md-4 mb-3">
+            <label for="country_box" class="form-label text-truncate">Country</label>
+            <input id="country_box" name="query_country" type="text" class="form-control" value="<%= @the_job.country%>">
+          </div>
 
-      <div>
-        <label for="job_desc_box">
-          Job desc
-        </label>
+          <div class="col-md-4 mb-3">
+            <label for="state_box" class="form-label text-truncate">State</label>
+            <input id="state_box" name="query_state" type="text" class="form-control" value="<%= @the_job.state%>">
+          </div>
 
-        <textarea id="job_desc_box" name="query_job_desc"><%= @the_job.job_desc %></textarea>
-      </div>
+          <div class="col-md-4 mb-3">
+            <label for="city_box" class="form-label text-truncate">City</label>
+            <input id="city_box" name="query_city" type="text" class="form-control" value="<%= @the_job.city%>">
+          </div>
 
-      <div>
-        <label for="job_desc_link_box">
-          Job desc link
-        </label>
+          <div class="col-md-4 mb-3">
+            <label for="job_desc_link_box" class="form-label text-truncate">Job description link</label>
+            <input id="job_desc_link_box" name="query_job_desc_link" type="text" class="form-control" value="<%= @the_job.job_desc_link%>">
+          </div>
 
-        <input type="text" id="job_desc_link_box" name="query_job_desc_link" value="<%= @the_job.job_desc_link %>">
-      </div>
+          <div class="col-md-4 mb-3">
+            <label for="follow_up_link_box" class="form-label text-truncate">Follow up link</label>
+            <input id="follow_up_link_box" name="query_follow_up_link" type="text" class="form-control" value="<%= @the_job.follow_up_link%>">
+          </div>
 
-      <div>
-        <label for="follow_up_link_box">
-          Follow up link
-        </label>
+          <div class="col-md-4 mb-3">
+            <label for="job_desc_box" class="form-label text-truncate">Job description (paste for future use)</label>
+            <input id="job_desc_box" name="query_job_desc" type="text" class="form-control" value="<%= @the_job.job_desc%>">
+          </div>
 
-        <input type="text" id="follow_up_link_box" name="query_follow_up_link" value="<%= @the_job.follow_up_link %>">
-      </div>
+          <div class="col-md-2 mb-3 my-auto">
+            <button class="btn btn-primary text-truncate">Update</button>
+          </div>
 
-      <div>
-        <label for="status_box">
-          Status
-        </label>
-
-        <input type="text" id="status_box" name="query_status" value="<%= @the_job.status %>">
-      </div>
-
-      <div>
-        <label for="summary_job_desc_box">
-          Summary job desc
-        </label>
-
-        <textarea id="summary_job_desc_box" name="query_summary_job_desc"><%= @the_job.summary_job_desc %></textarea>
-      </div>
-
-      <div>
-        <label for="country_box">
-          Country
-        </label>
-
-        <input type="text" id="country_box" name="query_country" value="<%= @the_job.country %>">
-      </div>
-
-      <div>
-        <label for="city_box">
-          City
-        </label>
-
-        <input type="text" id="city_box" name="query_city" value="<%= @the_job.city %>">
-      </div>
-
-      <div>
-        <label for="state_box">
-          State
-        </label>
-
-        <input type="text" id="state_box" name="query_state" value="<%= @the_job.state %>">
-      </div>
-
-      <div>
-        <label for="job_number_box">
-          Job number
-        </label>
-
-        <input type="text" id="job_number_box" name="query_job_number" value="<%= @the_job.job_number %>">
-      </div>
-
-      <div>
-        <label for="firm_id_box">
-          Firm
-        </label>
-
-        <input type="text" id="firm_id_box" name="query_firm_id" value="<%= @the_job.firm_id %>">
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_job.user_id %>">
-      </div>
-
-      <button>
-        Update job
-      </button>
-    </form>
+      </form>
+              
+    </div>
   </div>
 </div>
-
-      <div>
-        <a href="/delete_job/<%= @the_job.id %>">
-          Delete job
-        </a>
-      </div>
-
-<hr>

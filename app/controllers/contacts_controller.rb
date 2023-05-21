@@ -9,19 +9,15 @@ class ContactsController < ApplicationController
 
   def show
     the_id = params.fetch("path_id")
-
     matching_contacts = Contact.where({ :id => the_id })
-
     @the_contact = matching_contacts.at(0)
 
     render({ :template => "contacts/show.html.erb" })
   end
 
-  def show
+  def edit
     the_id = params.fetch("path_id")
-
     matching_contacts = Contact.where({ :id => the_id })
-
     @the_contact = matching_contacts.at(0)
 
     render({ :template => "contacts/edit.html.erb" })
@@ -105,4 +101,15 @@ class ContactsController < ApplicationController
 
     redirect_to("/contacts", { :notice => "Contact deleted successfully."} )
   end
+
+  def destroy_from_job
+    the_id = params.fetch("path_id")
+    the_contact = Contact.where({ :id => the_id }).at(0)
+    job_id = params.fetch("job_id")
+
+    the_contact.destroy
+
+    redirect_to("/jobs/#{job_id}", { :notice => "Contact deleted successfully."} )
+  end
+
 end

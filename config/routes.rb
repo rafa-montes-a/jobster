@@ -61,6 +61,8 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_contact/:path_id", { :controller => "contacts", :action => "destroy" })
+  
+  get("/delete_contact_from_job/:path_id/:job_id", { :controller => "contacts", :action => "destroy_from_job" })
 
   #------------------------------
 
@@ -107,6 +109,10 @@ Rails.application.routes.draw do
   get("/modify_status_to_interview_from_job/:path_id", { :controller => "jobs", :action => "update_to_interview_from_job" })
   get("/modify_status_to_applied_from_job/:path_id", { :controller => "jobs", :action => "update_to_applied_from_job" })
   get("/modify_status_to_rejected_from_job/:path_id", { :controller => "jobs", :action => "update_to_rejected_from_job" })
+
+  get("/modify_status_to_interview_from_edit/:path_id", { :controller => "jobs", :action => "update_to_interview_from_edit" })
+  get("/modify_status_to_applied_from_edit/:path_id", { :controller => "jobs", :action => "update_to_applied_from_edit" })
+  get("/modify_status_to_rejected_from_edit/:path_id", { :controller => "jobs", :action => "update_to_rejected_from_edit" })
   
   # DELETE
   get("/delete_job/:path_id", { :controller => "jobs", :action => "destroy" })
