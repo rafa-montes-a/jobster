@@ -86,6 +86,11 @@
 
 <div class="row"> <br> </div>
 
+<% if @current_user.jobs.count == 0 %>
+You don't have jobs applications yet.
+<% else %>
+<% end %>
+
 <% @status.each do |a_status| %>
   
 <div>

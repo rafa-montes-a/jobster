@@ -1,66 +1,69 @@
-<div >
-  <h5>
-    Edit User Account
-  </h5>
+<h2>
+  Welcome, <%= @current_user.first_name %>
+</h2>
+<br>
 
   <% if @user.errors.any? %>
   <% @user.errors.full_messages.each do |message| %>
-    <div class="alert">
+    <div class="alert alert-danger d-flex justify-content-between">
       <%= message %>
     </div>
   <% end %>
   <% end %>
-  <div>
-    <form action="/modify_user" method="post">
-              
-      <div>
-        <label for="email_box">Email</label>
-          
-        <input id="email_box" name="query_email" value="<%= @current_user.email %>">
-          
-      </div>
-                                    
-      <div>
-        <label for="first_name_box">First name</label>
-          
-        <input id="first_name_box" name="query_first_name" value="<%= @current_user.first_name %>">
-          
-      </div>
-                      
-      <div>
-        <label for="last_name_box">Last name</label>
-          
-        <input id="last_name_box" name="query_last_name" value="<%= @current_user.last_name %>">
-          
-      </div>
-                      
-      <div>
-        <label for="resume_box">Resume</label>
-          
-        <textarea id="resume_box" name="query_resume" rows="3"><%= @current_user.resume %></textarea> 
-          
-      </div>
-                      
-      <div>
-        <label for="skills_box">Skills</label>
-          
-        <textarea id="skills_box" name="query_skills" rows="3"><%= @current_user.skills %></textarea> 
-          
-      </div>
-              
-      <div>
-        <label for="password_box">Password</label>
-        <input id="password_box" name="query_password" placeholder="Choose a new password..." type="password">
-      </div>
-    
-      <div>
-        <label for="password_confirmation_box">Password Confirmation</label>
-        <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your new password..." type="password">
-      </div>
 
-      <button>
-        Update account
-      </button>
-    </form>
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">
+      <div class="row d-flex justify-content-between">          
+          <div class="col">
+            Settings
+          </div>
+         
+          
+        </div>
+    </h5>
+
+    <div class="card-body">
+
+      <form action="/modify_user"  method="post" >
+          
+          <div class="col-md-4 mb-3">
+            <label for="email_box" class="form-label text-truncate">Email*</label>
+            <input id="email_box" name="query_email" type="email" class="form-control" value="<%= @current_user.email%>">
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="first_name_box" class="form-label text-truncate">First name*</label>
+            <input id="first_name_box" name="query_first_name" type="text" class="form-control" value="<%= @current_user.first_name%>">
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="last_name_box" class="form-label text-truncate">Last name*</label>
+            <input id="last_name_box" name="query_last_name" type="text" class="form-control" value="<%= @current_user.last_name%>">
+          </div>
+
+         
+
+          <div class="col-md-4 mb-3">
+            Change password:
+          </div>
+         
+          <div class="col-md-4 mb-3">
+            <label for="password_box" class="form-label text-truncate">New password*</label>
+            <input id="password_box" name="query_password" type="password" class="form-control">
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="password_confirmation_box" class="form-label text-truncate">Confirm new password*</label>
+            <input id="password_confirmation_box" name="query_password_confirmation" type="password" class="form-control">
+          </div>
+
+          <div class="col-md-2 mb-3 my-auto">
+            <button class="btn btn-primary text-truncate">Save changes</button>
+          </div>
+
+      </form>
+              
+    </div>
   </div>
 </div>

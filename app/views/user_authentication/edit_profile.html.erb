@@ -17,7 +17,7 @@
 
     <div class="card-body">
 
-      <form action="/modify_user %>"  method="post" >
+      <form action="/modify_user"  method="post" >
           
           <div class="col-md-4 mb-3">
             <label for="email_box" class="form-label text-truncate">Email*</label>
@@ -34,6 +34,12 @@
             <input id="last_name_box" name="query_last_name" type="text" class="form-control" value="<%= @current_user.last_name%>">
           </div>
 
+         
+
+          <div class="col-md-4 mb-3">
+            Change password:
+          </div>
+         
           <div class="col-md-4 mb-3">
             <label for="password_box" class="form-label text-truncate">New password*</label>
             <input id="password_box" name="query_password" type="password" class="form-control">
@@ -53,5 +59,3 @@
     </div>
   </div>
 </div>
-
-
