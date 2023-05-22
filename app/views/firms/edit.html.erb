@@ -1,0 +1,38 @@
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">
+      <div class="row d-flex justify-content-between">          
+          <div class="col">
+            <%= @the_firm.firm_name %>
+          </div>
+         
+          <div class="col-md-3 text-end">
+            <a href="/delete_firm/<%= @the_firm.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= @the_firm.id %>)" > <i class="bi bi-x-circle"></i> </a>
+          </div>
+        </div>
+    </h5>
+
+
+    <div class="card-body">
+
+      <form action="/modify_firm/<%= @the_firm.id %>"  method="post" >
+          
+          <div class="col-md-4 mb-3">
+            <label for="firm_name_box" class="form-label text-truncate">Company*</label>
+            <input id="firm_name_box" name="query_firm_name" type="text" class="form-control" value="<%= @the_firm.firm_name%>">
+          </div>          
+
+          <div class="col-md-2 mb-3 my-auto">
+            <button class="btn btn-primary text-truncate">Save changes</button>
+          </div>
+
+      </form>
+
+
+
+
+
+
+
+  </div>
+</div>

@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   # CREATE
   post("/insert_contact", { :controller => "contacts", :action => "create" })
   post("/insert_contact_from_job", { :controller => "contacts", :action => "create_from_job" })
+  post("/insert_contact_from_firm", { :controller => "contacts", :action => "create_from_firm" })
           
   # READ
   get("/contacts", { :controller => "contacts", :action => "index" })
@@ -64,6 +65,8 @@ Rails.application.routes.draw do
   
   get("/delete_contact_from_job/:path_id/:job_id", { :controller => "contacts", :action => "destroy_from_job" })
 
+  get("/delete_contact_from_firm/:path_id", { :controller => "contacts", :action => "destroy_from_firm" })
+
   #------------------------------
 
   # Routes for the Firm resource:
@@ -75,6 +78,8 @@ Rails.application.routes.draw do
   get("/firms", { :controller => "firms", :action => "index" })
   
   get("/firms/:path_id", { :controller => "firms", :action => "show" })
+
+  get("/firms/edit/:path_id", { :controller => "firms", :action => "edit" })
   
   # UPDATE
   
@@ -89,6 +94,7 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_job", { :controller => "jobs", :action => "create" })
+  post("/insert_job_from_firm", { :controller => "jobs", :action => "create_from_firm" })
           
   # READ
   get("/jobs", { :controller => "jobs", :action => "index" })
@@ -110,12 +116,17 @@ Rails.application.routes.draw do
   get("/modify_status_to_applied_from_job/:path_id", { :controller => "jobs", :action => "update_to_applied_from_job" })
   get("/modify_status_to_rejected_from_job/:path_id", { :controller => "jobs", :action => "update_to_rejected_from_job" })
 
+  get("/modify_status_to_interview_from_firm/:path_id", { :controller => "jobs", :action => "update_to_interview_from_firm" })
+  get("/modify_status_to_applied_from_firm/:path_id", { :controller => "jobs", :action => "update_to_applied_from_firm" })
+  get("/modify_status_to_rejected_from_firm/:path_id", { :controller => "jobs", :action => "update_to_rejected_from_firm" })
+
   get("/modify_status_to_interview_from_edit/:path_id", { :controller => "jobs", :action => "update_to_interview_from_edit" })
   get("/modify_status_to_applied_from_edit/:path_id", { :controller => "jobs", :action => "update_to_applied_from_edit" })
   get("/modify_status_to_rejected_from_edit/:path_id", { :controller => "jobs", :action => "update_to_rejected_from_edit" })
   
   # DELETE
   get("/delete_job/:path_id", { :controller => "jobs", :action => "destroy" })
+  get("/delete_job_from_firm/:path_id", { :controller => "jobs", :action => "destroy_from_firm" })
 
   #------------------------------
 

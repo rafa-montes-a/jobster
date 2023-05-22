@@ -78,7 +78,6 @@
           <a class="nav-link" href="/jobs">My applications</a>
           <a class="nav-link" href="/contacts">My contacts</a>
           <a class="nav-link" href="/firms">My companies</a>
-          <a class="nav-link" href="/touchpoints">Touchpoints</a>
           <a class="nav-link" href="/questions">Questions</a>
         <% end %>
       </div>
@@ -109,6 +108,8 @@
       </div>
     <% end %>
 
+    -->
+
     <% if alert == nil %>
     <% else %>
       <div class="alert alert-danger d-flex justify-content-between">
@@ -116,7 +117,7 @@
         <div class="col text-end"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
       </div>
     <% end %>
-    -->
+    
 
     <%= yield %>
   </div>

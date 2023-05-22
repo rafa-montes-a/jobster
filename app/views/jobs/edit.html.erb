@@ -66,8 +66,13 @@
             <input id="job_desc_box" name="query_job_desc" type="text" class="form-control" value="<%= @the_job.job_desc%>">
           </div>
 
+          <div class="col-md-4 mb-3">
+            <label for="created_at_box" class="form-label text-truncate">Date applied:</label>
+            <input id="created_at_box" name="query_created_at" type="date" class="form-control" value="<%= @the_job.created_at.strftime('%Y-%m-%d') %>">
+          </div>
+
           <div class="col-md-2 mb-3 my-auto">
-            <button class="btn btn-primary text-truncate">Update</button>
+            <button class="btn btn-primary text-truncate">Save changes</button>
           </div>
 
       </form>

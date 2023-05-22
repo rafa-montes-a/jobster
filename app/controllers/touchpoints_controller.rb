@@ -39,13 +39,13 @@ class TouchpointsController < ApplicationController
     the_touchpoint.description = params.fetch("query_description")
     the_touchpoint.date = params.fetch("query_date")
     the_touchpoint.notes = params.fetch("query_notes")
-    the_touchpoint.contact_id = params.fetch("query_contact_id")
+    the_touchpoint.contact_id = the_touchpoint.contact.id
 
     if the_touchpoint.valid?
       the_touchpoint.save
-      redirect_to("/touchpoints/#{the_touchpoint.id}", { :notice => "Touchpoint updated successfully."} )
+      redirect_to("/contacts/#{the_touchpoint.contact.id}", { :notice => "Touchpoint updated successfully."} )
     else
-      redirect_to("/touchpoints/#{the_touchpoint.id}", { :alert => the_touchpoint.errors.full_messages.to_sentence })
+      redirect_to("/contacts/#{the_touchpoint.contact.id}", { :alert => the_touchpoint.errors.full_messages.to_sentence })
     end
   end
 
@@ -56,6 +56,6 @@ class TouchpointsController < ApplicationController
 
     the_touchpoint.destroy
 
-    redirect_to("/contacts/show/#{contact_id}", { :notice => "Touchpoint deleted successfully."} )
+    redirect_to("/contacts/#{contact_id}", { :notice => "Touchpoint deleted successfully."} )
   end
 end

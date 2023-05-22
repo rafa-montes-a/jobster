@@ -1,116 +1,45 @@
-<div>
-  <div>
-    <h1>
-      Touchpoint #<%= @the_touchpoint.id %> details
-    </h1>
 
-    <div>
-      <div> 
-        <a href="/touchpoints">
-          Go back
-        </a>
-      </div>
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">
+      <div class="row d-flex justify-content-between">          
+          <div class="col">
+            <%= @the_touchpoint.description %> with <%= @the_touchpoint.contact.first_name %> <%= @the_touchpoint.contact.last_name %>
+          </div>
+         
+          <div class="col-md-3 text-end">
 
-      <div>
-        <a href="/delete_touchpoint/<%= @the_touchpoint.id %>">
-          Delete touchpoint
-        </a>
-      </div>
+              <a href="/delete_touchpoint/<%= @the_touchpoint.id %>>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= @the_touchpoint.id %>)" > <i class="bi bi-x-circle"></i> </a>
+            
+          </div>
+        </div>
+    </h5>
+
+
+    <div class="card-body">
+      
+      <form action="/modify_touchpoint/<%= @the_touchpoint.id %>"  method="post" >
+          
+          <div class="col-md-4 mb-3">
+            <label for="description_box" class="form-label text-truncate">Description</label>
+            <input id="description_box" name="query_description" type="text" class="form-control" value="<%= @the_touchpoint.description%>">
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="date_box" class="form-label text-truncate">Date</label>
+            <input id="date_box" name="query_date" type="date" class="form-control" value="<%= @the_touchpoint.date.strftime('%Y-%m-%d') %>">
+          </div>
+
+          <div class="col mb-3">
+            <textarea id="notes_box" name="query_notes" type="text" class="form-control h-100"> <%= @the_touchpoint.notes%> </textarea>
+          </div> 
+
+          <div class="col-md-2 mb-3 my-auto">
+            <button class="btn btn-primary text-truncate">Save changes</button>
+          </div>
+
+      </form>
+
     </div>
-
-    <dl>
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_touchpoint.description %>
-      </dd>
-
-      <dt>
-        Date
-      </dt>
-      <dd>
-        <%= @the_touchpoint.date %>
-      </dd>
-
-      <dt>
-        Notes
-      </dt>
-      <dd>
-        <%= @the_touchpoint.notes %>
-      </dd>
-
-      <dt>
-        Contact
-      </dt>
-      <dd>
-        <%= @the_touchpoint.contact_id %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_touchpoint.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_touchpoint.updated_at) %> ago
-      </dd>
-    </dl>
   </div>
 </div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit touchpoint
-    </h2>
-
-    <form action="/modify_touchpoint/<%= @the_touchpoint.id %>"  method="post" >
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <input type="text" id="description_box" name="query_description" value="<%= @the_touchpoint.description %>">
-      </div>
-
-      <div>
-        <label for="date_box">
-          Date
-        </label>
-
-        <input type="time" id="date_box" name="query_date" value="<%= @the_touchpoint.date %>">
-      </div>
-
-      <div>
-        <label for="notes_box">
-          Notes
-        </label>
-
-        <textarea id="notes_box" name="query_notes"><%= @the_touchpoint.notes %></textarea>
-      </div>
-
-      <div>
-        <label for="contact_id_box">
-          Contact
-        </label>
-
-        <input type="text" id="contact_id_box" name="query_contact_id" value="<%= @the_touchpoint.contact_id %>">
-      </div>
-
-      <button>
-        Update touchpoint
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>

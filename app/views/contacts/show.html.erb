@@ -23,7 +23,7 @@
         <% if @the_contact.firm_name.nil? || @the_contact.firm_name.blank? %>
           <p class="opacity-25"> <strong> JCompany: </strong> </p>
         <% else %>
-          <p> <strong> Company: </strong> <%= @the_contact.firm_name %> </p>
+          <p> <strong> Company: </strong> <a href="/firms/<%= @the_contact.firm_id %>"> <%= @the_contact.firm_name %> </a> </p>
         <% end %>
       </div>
 
@@ -40,6 +40,14 @@
           <p class="opacity-25"> <strong> Email: </strong> </p>
         <% else %>
           <p> <strong> Email: </strong> <%= @the_contact.email %> </p>
+        <% end %>
+      </div>
+
+      <div>
+        <% if @the_contact.touchpoints.count == 0 %>
+          <p class="opacity-25"> <strong> Last touchpoint: </strong> </p>
+        <% else %>
+          <p> <strong> Last touchpoint: </strong> <%= time_ago_in_words(@the_contact.touchpoints.last.date) %> ago </p>
         <% end %>
       </div>
 
@@ -93,6 +101,10 @@
 
                     <div class="col">                    
                       <strong> <%= a_touchpoint.description %> </strong>
+                    </div>
+
+                    <div class="col">                    
+                       <%= a_touchpoint.date.strftime("%B %d, %Y") %> 
                     </div>
 
                     <div class="col text-end me-3"> 

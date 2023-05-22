@@ -1,80 +1,56 @@
-<div>
-  <div>
-    <h2>
-      Edit contact
-    </h2>
 
-    <form action="/modify_contact/<%= @the_contact.id %>"  method="post" >
-      <div>
-        <label for="first_name_box">
-          First name
-        </label>
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">
+      <div class="row d-flex justify-content-between">          
+          <div class="col">
+            <%= @the_contact.first_name %> <%= @the_contact.last_name %>
+          </div>
+         
+          <div class="col-md-3 text-end">
 
-        <input type="text" id="first_name_box" name="query_first_name" value="<%= @the_contact.first_name %>">
-      </div>
+              <a href="/delete_contact/<%= @the_contact.id %>>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= @the_contact.id %>)" > <i class="bi bi-x-circle"></i> </a>
+            
+          </div>
+        </div>
+    </h5>
 
-      <div>
-        <label for="last_name_box">
-          Last name
-        </label>
 
-        <input type="text" id="last_name_box" name="query_last_name" value="<%= @the_contact.last_name %>">
-      </div>
+    <div class="card-body">
+      
+      <form action="/modify_contact/<%= @the_contact.id %>"  method="post" >
+          
+          <div class="col-md-4 mb-3">
+            <label for="first_name_box" class="form-label text-truncate">First name</label>
+            <input id="first_name_box" name="query_first_name" type="text" class="form-control" value="<%= @the_contact.first_name%>">
+          </div>
 
-      <div>
-        <label for="firm_name_box">
-          Firm name
-        </label>
+          <div class="col-md-4 mb-3">
+            <label for="last_name_box" class="form-label text-truncate">Last name</label>
+            <input id="last_name_box" name="query_last_name" type="text" class="form-control" value="<%= @the_contact.last_name%>">
+          </div>
 
-        <input type="text" id="firm_name_box" name="query_firm_name" value="<%= @the_contact.firm_name %>">
-      </div>
+          <div class="col-md-4 mb-3">
+            <label for="firm_name_box" class="form-label text-truncate">Company name</label>
+            <input id="firm_name_box" name="query_firm_name" type="text" class="form-control" value="<%= @the_contact.firm_name%>">
+          </div>
 
-      <div>
-        <label for="role_box">
-          Role
-        </label>
+          <div class="col-md-4 mb-3">
+            <label for="role_box" class="form-label text-truncate">Role</label>
+            <input id="role_box" name="query_role" type="text" class="form-control" value="<%= @the_contact.role%>">
+          </div>
 
-        <input type="text" id="role_box" name="query_role" value="<%= @the_contact.role %>">
-      </div>
+          <div class="col-md-4 mb-3">
+            <label for="email_box" class="form-label text-truncate">Email</label>
+            <input id="email_box" name="query_email" type="text" class="form-control" value="<%= @the_contact.email%>">
+          </div>
 
-      <div>
-        <label for="email_box">
-          Email
-        </label>
+          <div class="col-md-2 mb-3 my-auto">
+            <button class="btn btn-primary text-truncate">Save changes</button>
+          </div>
 
-        <input type="text" id="email_box" name="query_email" value="<%= @the_contact.email %>">
-      </div>
+      </form>
 
-      <div>
-        <label for="status_box">
-          Status
-        </label>
-
-        <input type="text" id="status_box" name="query_status" value="<%= @the_contact.status %>">
-      </div>
-
-      <div>
-        <label for="firm_id_box">
-          Firm
-        </label>
-
-        <input type="text" id="firm_id_box" name="query_firm_id" value="<%= @the_contact.firm_id %>">
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_contact.user_id %>">
-      </div>
-
-      <button>
-        Update contact
-      </button>
-    </form>
+    </div>
   </div>
 </div>
-
-<hr>
-

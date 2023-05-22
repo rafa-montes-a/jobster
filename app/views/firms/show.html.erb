@@ -1,86 +1,235 @@
-<div>
-  <div>
-    <h1>
-      Firm #<%= @the_firm.id %> details
-    </h1>
 
-    <div>
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">
+      <div class="row d-flex justify-content-between">          
+          <div class="col">
+            <%= @the_firm.firm_name %>
+          </div>
+         
+          <div class="col-md-3 text-end">
+            <a href="/firms/edit/<%= @the_firm.id %>" title="Edit company" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+            <a href="/delete_firm/<%= @the_firm.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= @the_firm.id %>)" > <i class="bi bi-x-circle"></i> </a>
+          </div>
+        </div>
+    </h5>
+
+    <div class="card-body">
+
       <div>
-        <a href="/firms">
-          Go back
-        </a>
+        <% if @the_firm.jobs.count.nil? || @the_firm.jobs.count.blank? %>
+          <p class="opacity-25"> <strong> Job applications: </strong> </p>
+        <% else %>
+          <p> <strong> Job applications: </strong> <%= @the_firm.jobs.count %> </p>
+        <% end %>
       </div>
 
       <div>
-        <a href="/delete_firm/<%= @the_firm.id %>">
-          Delete firm
-        </a>
+        <% if @the_firm.contacts.count.nil? || @the_firm.contacts.count.blank? %>
+          <p class="opacity-25"> <strong> Contacts: </strong> </p>
+        <% else %>
+          <p> <strong> Contacts: </strong> <%= @the_firm.contacts.count %> </p>
+        <% end %>
       </div>
+
     </div>
-
-    <dl>
-      <dt>
-        Firm name
-      </dt>
-      <dd>
-        <%= @the_firm.firm_name %>
-      </dd>
-
-      <dt>
-        User
-      </dt>
-      <dd>
-        <%= @the_firm.user_id %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_firm.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_firm.updated_at) %> ago
-      </dd>
-    </dl>
   </div>
 </div>
 
-<hr>
+<br>
 
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">My contacts @ <%= @the_firm.firm_name %> </h5>
+      <div class="card-body">
 
-<div>
-  <div>
-    <h2>
-      Edit firm
-    </h2>
+      <form action="/insert_contact_from_firm" method="post">
 
-    <form action="/modify_firm/<%= @the_firm.id %>"  method="post" >
-      <div>
-        <label for="firm_name_box">
-          Firm name
-        </label>
+        <div class="row">
+        
+          <div class="col mb-3">
+              <label for="first_name_box" class="form-label">First name*</label>
+              <input id="first_name_box" name="query_first_name" type="text" class="form-control">
+          </div>     
 
-        <input type="text" id="firm_name_box" name="query_firm_name" value="<%= @the_firm.firm_name %>">
-      </div>
+          <div class="col mb-3">
+              <label for="last_name_box" class="form-label">Last name*</label>
+              <input id="last_name_box" name="query_last_name" type="text" class="form-control">
+          </div>    
 
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
+          <div class="col mb-3">
+              <label for="role_box" class="form-label">Role</label>
+              <input id="role_box" name="query_role" type="text" class="form-control">
+          </div>    
 
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_firm.user_id %>">
-      </div>
+          <div class="col mb-3">
+              <label for="email_box" class="form-label">Email</label>
+              <input id="email_box" name="query_email" type="email" class="form-control">
 
-      <button>
-        Update firm
-      </button>
+              <input id="firm_name_box" name="query_firm_name" type="hidden" class="form-control" value="<%= @the_firm.firm_name %>">
+              <input id="firm_id_box" name="query_firm_id" type="hidden" class="form-control" value="<%= @the_firm.id %>">
+          </div>    
+
+          <div class="col mb-3 my-auto text-end">
+            <button class="btn btn-primary">Add contact</button>
+          </div>
+
+        </div>
+
     </form>
+
+
+
+      <% @the_firm.contacts.each do |a_contact| %>
+
+      <div class="list-group">
+        <button type="button" class="list-group-item list-group-item-action parent-button" onclick="window.location.href='/contacts/<%= a_contact.id %>'">
+          <div class="col">
+            <div class="row d-flex justify-content-between">
+          
+              <div class="col-md-2 text-truncate">
+                <%= a_contact.first_name %> <%= a_contact.last_name %>
+              </div>
+
+              <div class="col-md-2 text-truncate">
+                <%= a_contact.role %>
+              </div>
+
+              <div class="col-md-2 text-truncate">
+                <%= a_contact.email %>
+              </div>
+
+              <div class="col-md-1">              
+                <span class="badge rounded-pill text-bg-light"><%= a_contact.touchpoints.count %> touchpoints</span>            
+              </div>
+
+              <div class="col-md-2 text-end">
+                <a href="/contacts/edit/<%= a_contact.id %>"  title="Edit contact"class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
+                <a href="/delete_contact_from_firm/<%= a_contact.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_contact.id %>)" > <i class="bi bi-x-circle"></i> </a>
+              </div>                 
+
+            </div>
+          </div>
+         </button> 
+        <% end %>
+      </div>
   </div>
 </div>
 
-<hr>
+<br>
+
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">My job applications @ <%= @the_firm.firm_name %> </h5>
+      <div class="card-body">
+
+        <form action="/insert_job_from_firm" method="post">
+
+          <div class="row">
+               
+                <input id="firm_name_box" name="query_firm_name" type="hidden" class="form-control" value="<%= @the_firm.firm_name %>">
+
+                <input id="firm_id_box" name="query_firm_id" type="hidden" class="form-control" value="<%= @the_firm.id %>">
+           
+            <div class="col mb-3">
+                <label for="role_box" class="form-label text-truncate">Role*</label>
+                <input id="role_box" name="query_role" type="text" class="form-control">
+            </div>
+
+            <div class="col mb-3">
+                <label for="job_number_box" class="form-label text-truncate">Job number</label>
+                <input id="job_number_box" name="query_job_number" type="text" class="form-control">
+            </div>
+
+            <div class="col mb-3">
+                <label for="country_box" class="form-label text-truncate">Country</label>
+                <input id="country_box" name="query_country" type="text" class="form-control" value="USA">
+            </div>
+
+            <div class="col mb-3">
+                <label for="state_box" class="form-label text-truncate">State</label>
+                <input id="state_box" name="query_state" type="text" class="form-control">
+            </div>
+
+            <div class="col mb-3">
+                <label for="city_box" class="form-label text-truncate">City</label>
+                <input id="city_box" name="query_city" type="text" class="form-control">
+            </div>
+
+            <div class="col mb-3">
+              <label for="status_box" class="form-label text-truncate">Status</label>
+              <select id="status_box" name="query_status" class="form-select" aria-label="Default select example">
+                <% @status.each do |a_status| %>
+                  <option <%= 'selected' if a_status == "Applied" %> > <%= a_status %> </option>
+                <% end %>
+              </select>
+            </div>
+
+            <div class="col mb-3">
+              <label for="job_desc_link_box" class="form-label text-truncate">Link to job description</label>
+              <input id="job_desc_link_box" name="query_job_desc_link" type="text" class="form-control" placeholder="https://jobposting.site">
+            </div>
+
+            <div class="col mb-3">
+              <label for="follow_up_link_box" class="form-label text-truncate">Link to follow up</label>
+              <input id="follow_up_link_box" name="query_follow_up_link" type="text" class="form-control" placeholder="https://company.jobs">
+            </div>
+
+            <div class="col-md-1 mb-3 my-auto">
+              <button class="btn btn-primary text-truncate">Add job</button>
+            </div>
+          
+        </form>
+
+        </div>
+        
+          <% @status.each do |a_status| %>
+
+            <% if @current_user.jobs.where({ :firm_id => @the_firm.id , :status => a_status }).count > 0 %>
+              <br>
+            <% end %>
+            
+            <div class="list-group">
+          
+              <% @current_user.jobs.where({ :firm_id => @the_firm.id , :status => a_status }).order({ :created_at => :asc }).each do |a_job| %>
+
+                <button type="button" class="list-group-item list-group-item-action parent-button" onclick="window.location.href='/jobs/<%= a_job.id %>'">
+                  <div class="col">
+                    <div class="row d-flex justify-content-between">
+
+                      <div class="col-md-2 text-truncate">
+                        <%= a_job.role %>
+                      </div>
+
+                      <div class="col-md-2 text-truncate">
+                        <%= a_job.city %> 
+                        <%= a_job.state %> 
+                        <%= a_job.country %>             
+                      </div>
+
+                      <div class="col-md-1">
+                          <span class="badge rounded-pill text-bg-<%= @color.at(@status.index(a_job.status)) %>"> <%= a_job.status %></span>
+                      </div>
+
+                      <div class="col-md-2 text-end">
+                        <a href="/modify_status_to_interview_from_firm/<%= a_job.id %>" title="Interview" class="btn btn-outline-success btn-sm"> <i class="bi bi-emoji-smile"></i> </a>
+                        <a href="/modify_status_to_applied_from_firm/<%= a_job.id %>" title="Applied" class="btn btn-outline-warning btn-sm"> <i class="bi bi-send-check"></i> </a>
+                        <a href="/modify_status_to_rejected_from_firm/<%= a_job.id %>" title="Rejected" class="btn btn-outline-danger btn-sm"> <i class="bi bi-emoji-frown"></i> </a>            
+                      </div>
+
+                      <div class="col-md-1 text-end">
+                        <a href="/jobs/edit/<%= a_job.id %>" title="Edit job" class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
+                        <a href="/delete_job_from_firm/<%= a_job.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_job.id %>)" > <i class="bi bi-x-circle"></i> </a>
+                      </div>   
+
+                    </div>
+                  </div>    
+                </button>
+              <% end %>
+
+            </div>
+
+
+          <% end %>
+  </div>
+</div>
