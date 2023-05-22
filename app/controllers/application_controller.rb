@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action(:force_user_sign_in)
 
   before_action(:define_status)
+  before_action(:define_gpt_questions)
   
   def load_current_user
     the_id = session[:user_id]
@@ -21,6 +22,10 @@ class ApplicationController < ActionController::Base
   def define_status
     @status = ["Interview", "Applied", "Rejected"]
     @color = ["success", "warning", "danger"]
+  end
+
+  def define_gpt_questions
+    @gpt_questions = [ "What are the main challenges of this company?", "Why would I like to work at this role?", "Questions you could get at this interview", "Questions you could ask your interviewer"]
   end
 
 end

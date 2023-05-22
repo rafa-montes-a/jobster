@@ -30,7 +30,7 @@ class FirmsController < ApplicationController
   def create
     the_firm = Firm.new
     the_firm.firm_name = params.fetch("query_firm_name")
-    the_firm.user_id = params.fetch("query_user_id")
+    the_firm.user_id = @current_user.id
 
     if the_firm.valid?
       the_firm.save
@@ -75,6 +75,18 @@ class FirmsController < ApplicationController
       redirect_to("/firms", { :notice => "Company deleted successfully."} )
     else
       redirect_to("/firms/#{the_firm.id}", { :alert => "You can only delete a company if it has 0 Job Applications and 0 Contacts."} )
+    end
+  end
+
+  def destroy_from_index
+    the_id = params.fetch("path_id")
+    the_firm = Firm.where({ :id => the_id }).at(0)
+
+    if the_firm.contacts.count == 0 && the_firm.jobs.count == 0
+      the_firm.destroy
+      redirect_to("/firms", { :notice => "Company deleted successfully."} )
+    else
+      redirect_to("/firms", { :alert => "You can only delete a company if it has 0 Job Applications and 0 Contacts."} )
     end
   end
 

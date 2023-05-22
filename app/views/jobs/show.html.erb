@@ -70,6 +70,14 @@
         <% end %>
       </div>
 
+      <div class="col-md-11">
+        <% if @the_job.job_desc.nil? || @the_job.job_desc.blank? %>
+          <p class="text-danger"> <strong> Job description: </strong> No job description. <a href="/jobs/edit/<%= @the_job.id %>">Add one</a> to generate CHAT GPT answers below.</p>
+        <% else %>
+          <p class="text-truncate"> <strong> Job description: </strong> <%= @the_job.job_desc %> </p>
+        <% end %>
+      </div>
+
       <div>
         <% if @the_job.created_at.nil? || @the_job.created_at.blank? %>
           <p class="opacity-25"> <strong> Applied at: </strong> </p>
@@ -158,6 +166,56 @@
           </div>
           
         <% end %>
+      </div>
+  </div>
+</div>
+
+<br>
+
+<div class="col-sm-12">
+  <div class="card">
+    <h5 class="card-header">Prepare for this job (Powered by ChatGPT)</h5>
+      <div class="card-body">
+        
+        <div class="accordion" id="accordionExample">
+
+          <% @the_job.questions.each do |a_question| %>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading<%= a_question.id %>">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= a_question.id %>" aria-expanded="false" aria-controls="collapse<%= a_question.id %>">
+
+                    <div class="col">                    
+                      <strong> <%= a_question.desc %> </strong>
+                    </div>
+
+                    <div class="col text-end me-3"> 
+                      
+                    </div>
+
+                </button>
+              </h2>
+              <div id="collapse<%= a_question.id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= a_question.id %>" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  
+                <% if a_question.answer.nil? || a_question.answer.blank? %>
+                  Click <a href="/modify_question/<%= a_question.id %>" title="Regenerate" class="btn btn-outline-success btn-sm"><i class="bi bi-arrow-repeat"></i></a> to generate an answer to this question (first, you need to add a <a href="/jobs/edit/<%= @the_job.id %>">job description</a>).
+                <% else %>
+                  <%= a_question.answer %>
+                  <br><br>
+                  Regenerate response <a href="/modify_question/<%= a_question.id %>" title="Regenerate" class="btn btn-outline-success btn-sm"><i class="bi bi-arrow-repeat"></i></a>
+                <% end %>
+
+                </div>
+              </div>
+            </div>
+
+          <% end %>
+
+        </div>  
+        
+
+        
       </div>
   </div>
 </div>

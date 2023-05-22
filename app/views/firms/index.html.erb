@@ -1,102 +1,63 @@
-<div>
-  <div>
-    <h1>
-      List of all firms
-    </h1>
+
+<h2>
+  My companies
+</h2>
+<br>
+
+<div class="row">
+  
+  <div class="col-md-2">
+    <p> <strong> Total: </strong> <%= @current_user.firms.count %> </p>
   </div>
+
 </div>
 
 <hr>
 
-<div>
-  <div>
-    <h2>
-      Add a new firm
-    </h2>
+<form action="/insert_firm" method="post">
 
-    <form action="/insert_firm" method="post">
-      <div>
-        <label for="firm_name_box">
-          Firm name
-        </label>
+  <div class="row">
+  
+    <div class="col-md-2 mb-3">
+        <label for="firm_name_box" class="form-label text-truncate">Company*</label>
+        <input id="firm_name_box" name="query_firm_name" type="text" class="form-control">
+    </div>        
 
-        <input type="text" id="firm_name_box" name="query_firm_name">
+    <div class="col mb-3 my-auto">
+      <button class="btn btn-primary">Add company</button>
+    </div>
+
+  </div>
+</form>
+
+<div class="row"> <br> </div>
+
+<div class="list-group">
+  <% @current_user.firms.order({ :firm_name => :asc}).each do |a_firm| %>
+    <button type="button" class="list-group-item list-group-item-action" onclick="window.location.href='/firms/<%= a_firm.id %>'">
+      <div class="col">
+        <div class="row d-flex">
+      
+          <div class="col text-truncate">
+            <%= a_firm.firm_name %>
+          </div>
+
+          <div class="col">              
+            <span class="badge rounded-pill text-bg-light"><%= a_firm.jobs.count %> applications</span>            
+          </div>
+
+          <div class="col">              
+            <span class="badge rounded-pill text-bg-light"><%= a_firm.contacts.count %> contacts</span>            
+          </div>
+
+          <div class="col-md-2 text-end">
+            <a href="/firms/edit/<%= a_firm.id %>"  title="Edit contact"class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
+            <a href="/delete_firm_from_index/<%= a_firm.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_firm.id %>)" > <i class="bi bi-x-circle"></i> </a>
+          </div>                 
+
+        </div>
       </div>
 
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
+  <% end %>
 
-        <input type="text" id="user_id_box" name="query_user_id">
-      </div>
-
-      <button>
-        Create firm
-      </button>
-    </form>
-  </div>
 </div>
-
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Firm name
-        </th>
-
-        <th>
-          User
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_firms.each do |a_firm| %>
-      <tr>
-        <td>
-          <%= a_firm.id %>
-        </td>
-
-        <td>
-          <%= a_firm.firm_name %>
-        </td>
-
-        <td>
-          <%= a_firm.user_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_firm.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_firm.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/firms/<%= a_firm.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>

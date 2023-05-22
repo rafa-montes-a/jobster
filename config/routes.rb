@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_question/:path_id", { :controller => "questions", :action => "update" })
+  get("/modify_question/:path_id", { :controller => "questions", :action => "update" })
   
   # DELETE
   get("/delete_question/:path_id", { :controller => "questions", :action => "destroy" })
@@ -87,6 +87,7 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_firm/:path_id", { :controller => "firms", :action => "destroy" })
+  get("/delete_firm_from_index/:path_id", { :controller => "firms", :action => "destroy_from_index" })
 
   #------------------------------
 

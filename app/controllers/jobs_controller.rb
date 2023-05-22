@@ -30,13 +30,14 @@ class JobsController < ApplicationController
   def create
     the_job = Job.new
     the_job.firm_name = params.fetch("query_firm_name")
-    the_job.role = params.fetch("query_role").titleize
+    the_job.role = params.fetch("query_role")
     the_job.job_desc_link = params.fetch("query_job_desc_link")
     the_job.follow_up_link = params.fetch("query_follow_up_link")
     the_job.country = params.fetch("query_country")
     the_job.state = params.fetch("query_state")
     the_job.city = params.fetch("query_city")
     the_job.job_number = params.fetch("query_job_number")
+    the_job.job_desc = params.fetch("query_job_desc")
     the_job.status = params.fetch("query_status")
     the_job.user_id = @current_user.id
 
@@ -51,9 +52,18 @@ class JobsController < ApplicationController
       the_firm.save
       the_job.firm_id = the_firm.id
     end
-
+   
+     
     if the_job.valid?
       the_job.save
+
+      @gpt_questions.each do |a_question|
+        the_question = Question.new
+        the_question.desc = a_question
+        the_question.job_id = the_job.id
+        the_question.save
+      end
+
       redirect_to("/jobs", { :notice => "Job created successfully." })
     else
       redirect_to("/jobs", { :alert => the_job.errors.full_messages.to_sentence })
@@ -64,7 +74,7 @@ class JobsController < ApplicationController
     the_job = Job.new
     the_job.firm_name = params.fetch("query_firm_name")
     the_job.firm_id = params.fetch("query_firm_id")
-    the_job.role = params.fetch("query_role").titleize
+    the_job.role = params.fetch("query_role")
     the_job.job_desc_link = params.fetch("query_job_desc_link")
     the_job.follow_up_link = params.fetch("query_follow_up_link")
     the_job.country = params.fetch("query_country")
@@ -76,6 +86,14 @@ class JobsController < ApplicationController
 
     if the_job.valid?
       the_job.save
+
+      @gpt_questions.each do |a_question|
+        the_question = Question.new
+        the_question.desc = a_question
+        the_question.job_id = the_job.id
+        the_question.save
+      end
+      
       redirect_to("/firms/#{the_job.firm_id}", { :notice => "Job created successfully." })
     else
       redirect_to("/firms/#{the_job.firm_id}", { :alert => the_job.errors.full_messages.to_sentence })

@@ -25,10 +25,10 @@ class ContactsController < ApplicationController
 
   def create
     the_contact = Contact.new
-    the_contact.first_name = params.fetch("query_first_name")
-    the_contact.last_name = params.fetch("query_last_name")
+    the_contact.first_name = params.fetch("query_first_name").titleize
+    the_contact.last_name = params.fetch("query_last_name").titleize
     the_contact.firm_name = params.fetch("query_firm_name")
-    the_contact.role = params.fetch("query_role")
+    the_contact.role = params.fetch("query_role").titleize
     the_contact.email = params.fetch("query_email")
     the_contact.user_id = @current_user.id
 
@@ -55,10 +55,10 @@ class ContactsController < ApplicationController
 
   def create_from_job
     the_contact = Contact.new
-    the_contact.first_name = params.fetch("query_first_name")
-    the_contact.last_name = params.fetch("query_last_name")
+    the_contact.first_name = params.fetch("query_first_name").titleize
+    the_contact.last_name = params.fetch("query_last_name").titleize
     the_contact.firm_name = params.fetch("query_firm_name")
-    the_contact.role = params.fetch("query_role")
+    the_contact.role = params.fetch("query_role").titleize
     the_contact.email = params.fetch("query_email")
     the_contact.firm_id = @current_user.firms.where({ :firm_name => the_contact.firm_name }).at(0).id
     the_contact.user_id = @current_user.id
@@ -74,10 +74,10 @@ class ContactsController < ApplicationController
 
   def create_from_firm
     the_contact = Contact.new
-    the_contact.first_name = params.fetch("query_first_name")
-    the_contact.last_name = params.fetch("query_last_name")
+    the_contact.first_name = params.fetch("query_first_name").titleize
+    the_contact.last_name = params.fetch("query_last_name").titleize
     the_contact.firm_name = params.fetch("query_firm_name")
-    the_contact.role = params.fetch("query_role")
+    the_contact.role = params.fetch("query_role").titleize
     the_contact.email = params.fetch("query_email")
     the_contact.firm_id = params.fetch("query_firm_id")
     the_contact.user_id = @current_user.id
@@ -94,10 +94,10 @@ class ContactsController < ApplicationController
     the_id = params.fetch("path_id")
     the_contact = Contact.where({ :id => the_id }).at(0)
 
-    the_contact.first_name = params.fetch("query_first_name")
-    the_contact.last_name = params.fetch("query_last_name")
+    the_contact.first_name = params.fetch("query_first_name").titleize
+    the_contact.last_name = params.fetch("query_last_name").titleize
     the_contact.firm_name = params.fetch("query_firm_name")
-    the_contact.role = params.fetch("query_role")
+    the_contact.role = params.fetch("query_role").titleize
     the_contact.email = params.fetch("query_email")
     the_contact.user_id = @current_user.id
 
