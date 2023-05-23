@@ -44,11 +44,11 @@ class QuestionsController < ApplicationController
 
     the_question.answer = "sample"
 
-    client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
+    client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"), request_timeout: 240)
 
     response = client.chat(
         parameters: {
-          model: "gpt-3.5-turbo-0301",
+          model: "gpt-3.5-turbo",
           messages: api_messages_array,
           temperature: 1.0,
         },

@@ -72,7 +72,7 @@
 
       <div class="col-md-11">
         <% if @the_job.job_desc.nil? || @the_job.job_desc.blank? %>
-          <p class="text-danger"> <strong> Job description: </strong> No job description. <a href="/jobs/edit/<%= @the_job.id %>">Add one</a> to generate CHAT GPT answers below.</p>
+          <p> <strong> Job description: </strong> No job description. <a href="/jobs/edit/<%= @the_job.id %>">Add one</a> to generate CHAT GPT answers below.</p>
         <% else %>
           <p class="text-truncate"> <strong> Job description: </strong> <%= @the_job.job_desc %> </p>
         <% end %>
