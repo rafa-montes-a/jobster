@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
 
     the_question.answer = "sample"
 
-    client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"), request_timeout: 240)
+    client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"), request_timeout: 200,)
 
     response = client.chat(
         parameters: {
