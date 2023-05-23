@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
     the_id = params.fetch("path_id")
     the_question = Question.where({ :id => the_id }).at(0)
 
-    the_question.prompt = "I am applying to an " + the_question.job.role.to_s + "role at "  + the_question.job.firm_name.to_s + ". Answer this question: " + the_question.desc.to_s + " acting as an expert in the company and the role. Use the following job description to guide your answer: " + the_question.job.job_desc.to_s
+    the_question.prompt = "Spend no more than 20 seconds answering this: I am applying to an " + the_question.job.role.to_s + "role at "  + the_question.job.firm_name.to_s + ". Answer this question: " + the_question.desc.to_s + " acting as an expert in the company and the role. Use the following job description to guide your answer: " + the_question.job.job_desc.to_s
 
     message_hash = { :role => "user", :content => the_question.prompt }
     api_messages_array = Array.new
