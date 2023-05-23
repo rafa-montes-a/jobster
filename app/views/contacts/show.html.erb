@@ -39,7 +39,7 @@
         <% if @the_contact.email.nil? || @the_contact.email.blank? %>
           <p class="opacity-25"> <strong> Email: </strong> </p>
         <% else %>
-          <p> <strong> Email: </strong> <%= @the_contact.email %> </p>
+          <p> <strong> Email: </strong> <a href=mailto:<%= @the_contact.email %>> <%= @the_contact.email %> </a> </p>
         <% end %>
       </div>
 
@@ -73,7 +73,7 @@
 
             <div class="col-md-2 mb-3">
                 <label for="date_box" class="form-label">Date</label>
-                <input id="date_box" name="query_date" type="date" class="form-control">
+                <input id="date_box" name="query_date" type="date" class="form-control" value="<%= Date.today.strftime('%Y-%m-%d') %>">
             </div>
 
             <input id="contact_id_box" name="query_contact_id" type="hidden" class="form-control" value="<%= @the_contact.id%>">
@@ -89,6 +89,11 @@
           </div>
 
         </form>
+
+        <% if @the_contact.touchpoints.count == 0 %>
+          You don't have touchpoints with <%= @the_contact.first_name %> yet.
+        <% else %>
+        <% end %>
 
         
         <div class="accordion" id="accordionExample">

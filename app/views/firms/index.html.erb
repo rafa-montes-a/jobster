@@ -32,6 +32,11 @@
 
 <div class="row"> <br> </div>
 
+<% if @current_user.firms.count == 0 %>
+  You don't have target companies yet.
+<% else %>
+<% end %>
+
 <div class="list-group">
   <% @current_user.firms.order({ :firm_name => :asc}).each do |a_firm| %>
     <button type="button" class="list-group-item list-group-item-action" onclick="window.location.href='/firms/<%= a_firm.id %>'">

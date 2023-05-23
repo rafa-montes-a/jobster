@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def define_gpt_questions
-    @gpt_questions = [ "What are the main challenges of this company?", "Why would I like to work at this role?", "Questions you could get at this interview", "Questions you could ask your interviewer"]
+    @gpt_questions = [ "What are the main challenges of this company?", "Why would I like to work at this role?", "What questions could I get at this interview?", "What questions could I ask my interviewer to leave a great impression?"]
   end
 
 end

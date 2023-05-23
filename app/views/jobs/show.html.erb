@@ -132,7 +132,10 @@
 
     </form>
 
-
+    <% if @the_job.firm.contacts.count == 0 %>
+      You don't have contacts at <%= @the_job.firm.firm_name %> yet.
+    <% else %>
+    <% end %>
 
         <% @the_job.firm.contacts.each do |a_contact| %>
 
@@ -150,7 +153,7 @@
               </div>
 
               <div class="col-md-2 text-truncate">
-                <%= a_contact.email %>
+                <a href=mailto:<%= a_contact.email %>> <%= a_contact.email %> </a> 
               </div>
 
               <div class="col-md-1">              
@@ -203,7 +206,7 @@
                 <% else %>
                   <%= a_question.answer %>
                   <br><br>
-                  Regenerate response <a href="/modify_question/<%= a_question.id %>" title="Regenerate" class="btn btn-outline-success btn-sm"><i class="bi bi-arrow-repeat"></i></a>
+                  Regenerate response (it may take some seconds) <a href="/modify_question/<%= a_question.id %>" title="Regenerate" class="btn btn-outline-success btn-sm"><i class="bi bi-arrow-repeat"></i></a>
                 <% end %>
 
                 </div>

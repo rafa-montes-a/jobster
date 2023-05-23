@@ -78,6 +78,11 @@
 
     </form>
 
+    <% if @the_firm.contacts.count == 0 %>
+      You don't have contacts at <%= @the_firm.firm_name %> yet.
+    <% else %>
+    <% end %>
+
 
     <div class="list-group">
       <% @the_firm.contacts.each do |a_contact| %>
@@ -95,7 +100,7 @@
               </div>
 
               <div class="col-md-2 text-truncate">
-                <%= a_contact.email %>
+                <a href=mailto:<%= a_contact.email %>> <%= a_contact.email %> </a>
               </div>
 
               <div class="col-md-1">              
@@ -180,7 +185,13 @@
           
         </form>
 
+        
         </div>
+
+        <% if @the_firm.jobs.count == 0 %>
+          You don't have job applications at <%= @the_firm.firm_name %> yet.
+        <% else %>
+        <% end %>
         
           <% @status.each do |a_status| %>
 
