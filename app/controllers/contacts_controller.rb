@@ -77,7 +77,7 @@ class ContactsController < ApplicationController
     the_contact.first_name = params.fetch("query_first_name").titleize
     the_contact.last_name = params.fetch("query_last_name").titleize
     the_contact.firm_name = params.fetch("query_firm_name")
-    the_contact.role = params.fetch("query_role").titleize
+    the_contact.role = params.fetch("query_role")
     the_contact.email = params.fetch("query_email")
     the_contact.firm_id = params.fetch("query_firm_id")
     the_contact.user_id = @current_user.id
@@ -97,7 +97,7 @@ class ContactsController < ApplicationController
     the_contact.first_name = params.fetch("query_first_name").titleize
     the_contact.last_name = params.fetch("query_last_name").titleize
     the_contact.firm_name = params.fetch("query_firm_name")
-    the_contact.role = params.fetch("query_role").titleize
+    the_contact.role = params.fetch("query_role")
     the_contact.email = params.fetch("query_email")
     the_contact.user_id = @current_user.id
 
