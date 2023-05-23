@@ -79,10 +79,9 @@
     </form>
 
 
-
+    <div class="list-group">
       <% @the_firm.contacts.each do |a_contact| %>
-
-      <div class="list-group">
+      
         <button type="button" class="list-group-item list-group-item-action parent-button" onclick="window.location.href='/contacts/<%= a_contact.id %>'">
           <div class="col">
             <div class="row d-flex justify-content-between">

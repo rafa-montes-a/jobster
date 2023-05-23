@@ -179,7 +179,7 @@
         
         <div class="accordion" id="accordionExample">
 
-          <% @the_job.questions.each do |a_question| %>
+          <% @the_job.questions.order({ :created_at => :asc }).each do |a_question| %>
 
             <div class="accordion-item">
               <h2 class="accordion-header" id="heading<%= a_question.id %>">
@@ -199,7 +199,7 @@
                 <div class="accordion-body">
                   
                 <% if a_question.answer.nil? || a_question.answer.blank? %>
-                  Click <a href="/modify_question/<%= a_question.id %>" title="Regenerate" class="btn btn-outline-success btn-sm"><i class="bi bi-arrow-repeat"></i></a> to generate an answer to this question (first, you need to add a <a href="/jobs/edit/<%= @the_job.id %>">job description</a>).
+                  Click <a href="/modify_question/<%= a_question.id %>" title="Regenerate" class="btn btn-outline-success btn-sm"><i class="bi bi-arrow-repeat"></i></a> to generate an answer to this question. This may take some seconds. <br>Recommendation: to get a better answer, add a <a href="/jobs/edit/<%= @the_job.id %>">job description</a>.
                 <% else %>
                   <%= a_question.answer %>
                   <br><br>
