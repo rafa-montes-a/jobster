@@ -25,7 +25,11 @@
 
     <div class="card-body">
 
+ <% if @current_user.first_name == "Samwise" %>
+      <form action="/"  method="get" >
+    <% else %>
       <form action="/modify_user"  method="post" >
+    <% end %>
           
           <div class="col-md-4 mb-3">
             <label for="email_box" class="form-label text-truncate">Email*</label>
