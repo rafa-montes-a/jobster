@@ -4,7 +4,7 @@
     <h5 class="card-header">
       <div class="row d-flex justify-content-between">          
           <div class="col">
-            <%= @the_job.role %> @ <%= @the_job.firm_name %> 
+            <i class="bi bi-list-check"></i> <%= @the_job.role %> @ <%= @the_job.firm_name %> 
             <span class="badge rounded-pill text-bg-<%= @color.at(@status.index(@the_job.status)) %>"> <%= @the_job.status %></span>
           </div>
          

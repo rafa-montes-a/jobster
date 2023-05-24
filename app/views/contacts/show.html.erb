@@ -4,7 +4,7 @@
     <h5 class="card-header">
       <div class="row d-flex justify-content-between">          
           <div class="col">
-            <%= @the_contact.first_name %> <%= @the_contact.last_name %>
+            <i class="bi bi-person-fill-check"></i> <%= @the_contact.first_name %> <%= @the_contact.last_name %>
           </div>
          
           <div class="col-md-3 text-end">
@@ -59,7 +59,7 @@
 
 <div class="col-sm-12">
   <div class="card">
-    <h5 class="card-header">My touchpoints with <%= @the_contact.first_name %> <%= @the_contact.last_name %></h5>
+    <h5 class="card-header"> <i class="bi bi-telephone-x"></i> My touchpoints with <%= @the_contact.first_name %> <%= @the_contact.last_name %></h5>
       <div class="card-body">
 
         <form action="/insert_touchpoint" method="post" class="form-floating">

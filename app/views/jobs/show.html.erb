@@ -5,7 +5,7 @@
     <h5 class="card-header">
       <div class="row d-flex justify-content-between">          
           <div class="col">
-            <%= @the_job.role %> @ <%= @the_job.firm_name %> 
+            <i class="bi bi-list-check"></i> <%= @the_job.role %> @ <%= @the_job.firm_name %> 
             <span class="badge rounded-pill text-bg-<%= @color.at(@status.index(@the_job.status)) %>"> <%= @the_job.status %></span>
           </div>
          
@@ -94,7 +94,7 @@
 
 <div class="col-sm-12">
   <div class="card">
-    <h5 class="card-header">My contacts @ <%= @the_job.firm_name %> </h5>
+    <h5 class="card-header"> <i class="bi bi-person-fill-check"></i> My contacts @ <%= @the_job.firm_name %> </h5>
       <div class="card-body">
 
       <form action="/insert_contact_from_job" method="post">
@@ -177,7 +177,7 @@
 
 <div class="col-sm-12">
   <div class="card">
-    <h5 class="card-header">Prepare for this job (Powered by ChatGPT)</h5>
+    <h5 class="card-header"><i class="bi bi-rocket-takeoff-fill"></i> Prepare for this job - Powered by ChatGPT</h5>
       <div class="card-body">
         
         <div class="accordion" id="accordionExample">
