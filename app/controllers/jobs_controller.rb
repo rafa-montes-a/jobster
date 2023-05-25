@@ -28,7 +28,7 @@ class JobsController < ApplicationController
   end
 
   def create
-    the_job = Job.new
+    the_job = Job.new 
     the_job.firm_name = params.fetch("query_firm_name")
     the_job.role = params.fetch("query_role")
     the_job.job_desc_link = params.fetch("query_job_desc_link")

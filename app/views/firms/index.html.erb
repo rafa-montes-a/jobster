@@ -47,15 +47,15 @@
             <%= a_firm.firm_name %>
           </div>
 
-          <div class="col">              
+          <div class="col-md-2 mb-1">              
             <span class="badge rounded-pill text-bg-light"><%= a_firm.jobs.count %> applications</span>            
           </div>
 
-          <div class="col">              
+          <div class="col-md-2 mb-1">              
             <span class="badge rounded-pill text-bg-light"><%= a_firm.contacts.count %> contacts</span>            
           </div>
 
-          <div class="col-md-2 text-end">
+          <div class="col-md-1 mb-1 text-truncate">
             <a href="/firms/edit/<%= a_firm.id %>"  title="Edit contact"class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
             <a href="/delete_firm_from_index/<%= a_firm.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_firm.id %>)" > <i class="bi bi-x-circle"></i> </a>
           </div>                 

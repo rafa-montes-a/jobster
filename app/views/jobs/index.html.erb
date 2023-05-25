@@ -102,35 +102,35 @@
         <div class="col">
           <div class="row d-flex justify-content-between">
             
-            <div class="col-md-2 text-truncate">
+            <div class="col-md-2 mb-1 text-truncate">
                 <%= a_job.firm_name %>
             </div>
 
-            <div class="col-md-2 text-truncate">
+            <div class="col-md-2 mb-1 text-truncate">
               <%= a_job.role %>
             </div>
 
-            <div class="col-md-2 text-truncate">
+            <div class="col-md-2 mb-1 text-truncate">
               <%= a_job.city %> 
               <%= a_job.state %> 
               <%= a_job.country %>             
             </div>
 
-            <div class="col-md-1 ">
+            <div class="col-md-1 mb-1 text-truncate">
               <span class="badge rounded-pill text-bg-light"> <%= @current_user.contacts.where({ :firm_id => a_job.firm_id }).count %> contacts</span>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-1 mb-1 text-truncate">
               <span class="badge rounded-pill text-bg-<%= @color.at(@status.index(a_job.status)) %>"> <%= a_job.status %></span>
             </div>
 
-            <div class="col-md-2 text-end">
+            <div class="col-md-2 mb-1">
               <a href="/modify_status_to_interview/<%= a_job.id %>" title="Interview" class="btn btn-outline-success btn-sm"> <i class="bi bi-emoji-smile"></i> </a>
               <a href="/modify_status_to_applied/<%= a_job.id %>" title="Applied" class="btn btn-outline-warning btn-sm"> <i class="bi bi-send-check"></i> </a>
               <a href="/modify_status_to_rejected/<%= a_job.id %>" title="Rejected" class="btn btn-outline-danger btn-sm"> <i class="bi bi-emoji-frown"></i> </a>            
             </div>
 
-            <div class="col-md-1 text-end">
+            <div class="col-md-1 mb-1 text-truncate">
               <a href="/jobs/edit/<%= a_job.id %>" title="Edit job" class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
               <a href="/delete_job/<%= a_job.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_job.id %>)" > <i class="bi bi-x-circle"></i> </a>
             </div>   

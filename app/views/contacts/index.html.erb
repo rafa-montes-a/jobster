@@ -18,32 +18,32 @@
 
   <div class="row">
   
-    <div class="col mb-3">
+    <div class="col mb-3 text-truncate">
         <label for="first_name_box" class="form-label text-truncate">First name*</label>
         <input id="first_name_box" name="query_first_name" type="text" class="form-control">
     </div>     
 
-    <div class="col mb-3">
+    <div class="col mb-3 text-truncate">
         <label for="last_name_box" class="form-label text-truncate">Last name*</label>
         <input id="last_name_box" name="query_last_name" type="text" class="form-control">
     </div>    
 
-    <div class="col mb-3">
+    <div class="col mb-3 text-truncate">
       <label for="firm_name_box" class="form-label text-truncate">Company*</label>
       <input id="firm_name_box" name="query_firm_name" type="text" class="form-control">
     </div>
 
-    <div class="col mb-3">
+    <div class="col mb-3 text-truncate">
         <label for="role_box" class="form-label text-truncate">Role</label>
         <input id="role_box" name="query_role" type="text" class="form-control">
     </div>    
 
-    <div class="col mb-3">
+    <div class="col mb-3 text-truncate">
         <label for="email_box" class="form-label text-truncate">Email</label>
         <input id="email_box" name="query_email" type="email" class="form-control">
     </div>    
 
-    <div class="col mb-3 my-auto text-end">
+    <div class="col mb-3 my-auto">
       <button class="btn btn-primary">Add contact</button>
     </div>
 
@@ -63,27 +63,27 @@
       <div class="col">
         <div class="row d-flex justify-content-between">
       
-          <div class="col text-truncate">
+          <div class="col-md-2 mb-1 text-truncate">
             <%= a_contact.first_name %> <%= a_contact.last_name %>
           </div>
 
-          <div class="col text-truncate">
+          <div class="col-md-2 mb-1 text-truncate">
             <%= a_contact.firm_name %>
           </div>
           
-          <div class="col text-truncate">
+          <div class="col-md-2 mb-1 text-truncate">
             <%= a_contact.role %>
           </div>
 
-          <div class="col text-truncate">
-            <%= a_contact.email %>
+          <div class="col-md-2 mb-1 text-truncate">
+            <a href=mailto:<%= a_contact.email %>><%= a_contact.email %></a>
           </div>
 
-          <div class="col-md-1">              
+          <div class="col-md-1 mb-1 text-truncate">              
             <span class="badge rounded-pill text-bg-light"><%= a_contact.touchpoints.count %> touchpoints</span>            
           </div>
 
-          <div class="col-md-2 text-end">
+          <div class="col-md-1 mb-1 text-truncate">
             <a href="/contacts/edit/<%= a_contact.id %>"  title="Edit contact"class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
             <a href="/delete_contact/<%= a_contact.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_contact.id %>)" > <i class="bi bi-x-circle"></i> </a>
           </div>                 
