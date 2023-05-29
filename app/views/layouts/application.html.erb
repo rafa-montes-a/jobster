@@ -125,7 +125,11 @@
         <div class="col text-end"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
       </div>
     <% end %>
-    
+
+
+    <div class="mb-3">
+      <a id="backButton" href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary btn-sm"> <i class="bi bi-arrow-left"></i> Back </a>
+    </div>
 
     <%= yield %>
 
@@ -134,6 +138,31 @@
       Developed by Rafael Montes at Chicago Booth. All rights reserved. Suggestions: <a href=mailto:rmontes@chicagobooth.edu>rmontes@chicagobooth.edu</a>
     </div>
   </div>
+
+   <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var backButton = document.getElementById('backButton');
+
+        function updateBackButtonVisibility() {
+          if (history.length > 1) {
+            backButton.style.display = 'inline-block';
+          } else {
+            backButton.style.display = 'none';
+          }
+        }
+
+        updateBackButtonVisibility();
+
+        window.onpopstate = function(event) {
+          updateBackButtonVisibility();
+        };
+
+        backButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          history.back();
+        });
+      });
+    </script>
 
   </body>
 </html>

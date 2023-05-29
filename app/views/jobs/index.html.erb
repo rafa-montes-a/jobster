@@ -94,7 +94,6 @@
 <% @status.each do |a_status| %>
   
 <div>
-
   
   <div class="list-group">
     <% @current_user.jobs.where({ :status => a_status }).order({ :created_at => :asc }).each do |a_job| %>
