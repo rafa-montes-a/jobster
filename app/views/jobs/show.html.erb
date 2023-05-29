@@ -160,7 +160,7 @@
                 <span class="badge rounded-pill text-bg-light"><%= a_contact.touchpoints.count %> touchpoints</span>            
               </div>
 
-              <div class="col-md-2 mb-1">
+              <div class="col-md-2 mb-1 text-end">
                 <a href="/contacts/edit/<%= a_contact.id %>"  title="Edit contact"class="btn btn-outline-primary btn-sm"> <i class="bi bi-pencil-square"></i> </a>
                 <a href="/delete_contact_from_job/<%= a_contact.id %>/<%= @the_job.id %>" title="Delete" class="btn btn-outline-danger btn-sm cancel-button" onclick="confirmDelete(event, <%= a_contact.id %>)" > <i class="bi bi-x-circle"></i> </a>
               </div>                 

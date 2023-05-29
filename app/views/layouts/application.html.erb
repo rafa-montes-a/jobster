@@ -82,6 +82,11 @@
           <a class="nav-link" href="/jobs"> <i class="bi bi-list-check"></i> My applications</a>
           <a class="nav-link" href="/contacts"> <i class="bi bi-person-fill-check"></i> My contacts</a>
           <a class="nav-link" href="/firms"> <i class="bi bi-archive"></i> My companies</a>
+
+          <% if @current_user.email == "rmontes@chicagobooth.edu" %>
+            <a class="nav-link" href="/admin"> <i class="bi bi-wrench-adjustable-circle-fill"></i> Admin settings</a>
+          <% else %>
+          <% end %>
         <% end %>
       </div>
 

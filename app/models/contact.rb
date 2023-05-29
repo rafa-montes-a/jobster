@@ -22,6 +22,7 @@ class Contact < ApplicationRecord
 
   belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id" })
   belongs_to(:firm, { :class_name => "Firm", :foreign_key => "firm_id" })
-  has_many(:touchpoints, { :class_name => "Touchpoint", :foreign_key => "contact_id", :dependent => :nullify })
+  #has_many(:touchpoints, { :class_name => "Touchpoint", :foreign_key => "contact_id", :dependent => :nullify })
+  has_many :touchpoints
 
 end
