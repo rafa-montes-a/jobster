@@ -139,30 +139,36 @@
     </div>
   </div>
 
-   <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var backButton = document.getElementById('backButton');
+    <script>
+    // Paste the JavaScript code here
+    function goBack() {
+      window.history.back();
+    }
 
-        function updateBackButtonVisibility() {
-          if (history.length > 1) {
-            backButton.style.display = 'inline-block';
-          } else {
-            backButton.style.display = 'none';
-          }
+    window.onload = function() {
+      var backButton = document.getElementById("backButton");
+
+      // Hide the back button initially if there is no history
+      if (window.history.length <= 1) {
+        backButton.style.display = "none";
+      }
+
+      // Check if the current URL is the homepage
+      if (window.location.href === "https://samwise.herokuapp.com/") {
+        backButton.style.display = "none";
+      }
+      
+      // Monitor the history changes
+      window.onpopstate = function() {
+        // Show or hide the back button based on the history length
+        if (window.history.length <= 1) {
+          backButton.style.display = "none";
+        } else {
+          backButton.style.display = "block";
         }
-
-        updateBackButtonVisibility();
-
-        window.onpopstate = function(event) {
-          updateBackButtonVisibility();
-        };
-
-        backButton.addEventListener('click', function(e) {
-          e.preventDefault();
-          history.back();
-        });
-      });
-    </script>
+      };
+    };
+  </script>
 
   </body>
 </html>
